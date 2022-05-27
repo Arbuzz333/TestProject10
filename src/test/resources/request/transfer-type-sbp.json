@@ -1,0 +1,11 @@
+{
+  "messageName" : "transfer-type",
+  "businessKey" : "viva.startMain0081",
+  "processVariables" : {
+    "transfer-type" : {
+      "value" : "{\"type\": \"SBP\"}",
+      "type" : "String"
+    }
+  },
+  "resultEnabled" : true
+}

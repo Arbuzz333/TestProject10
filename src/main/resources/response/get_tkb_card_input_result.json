@@ -1,0 +1,11 @@
+{
+  "hmac": "9339f20da5798da1b475dac153eb8ee8",
+  "response": {
+    "status": "SUCCESS",
+    "message": "",
+    "card_token": "test card token",
+    "tkb_status": "test tkb status",
+    "tkb_mistake_description": ""
+
+  }
+}

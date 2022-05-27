@@ -1,0 +1,11 @@
+{
+  "messageName" : "sbp-bank",
+  "businessKey" : "viva.startMain0081",
+  "processVariables" : {
+    "sbp-bank" : {
+      "value" : "{\"bank_key\": \"100000000111\"}",
+      "type" : "String"
+    }
+  },
+  "resultEnabled" : true
+}

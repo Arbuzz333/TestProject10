@@ -1,0 +1,833 @@
+{
+  "hmac": "ee51dbe27f2c070fa03162456716c5b1",
+  "response": {
+    "status": "SUCCESS",
+    "message": "",
+    "banks": [
+      {
+        "sbp_bank_key": "100000000111",
+        "sbp_bank_name": "Сбербанк"
+      },
+      {
+        "sbp_bank_key": "100000000004",
+        "sbp_bank_name": "Тинькофф Банк"
+      },
+      {
+        "sbp_bank_key": "500000000006",
+        "sbp_bank_name": "Digital payment"
+      },
+      {
+        "sbp_bank_key": "100000000164",
+        "sbp_bank_name": "KEB EichEnBi Bank"
+      },
+      {
+        "sbp_bank_key": "600000000014",
+        "sbp_bank_name": "OpenWay Сервис"
+      },
+      {
+        "sbp_bank_key": "100000000009",
+        "sbp_bank_name": "QIWI Кошелек"
+      },
+      {
+        "sbp_bank_key": "100000000047",
+        "sbp_bank_name": "Абсолют Банк"
+      },
+      {
+        "sbp_bank_key": "100000000028",
+        "sbp_bank_name": "Авангард"
+      },
+      {
+        "sbp_bank_key": "100000000130",
+        "sbp_bank_name": "Автоградбанк"
+      },
+      {
+        "sbp_bank_key": "100000000118",
+        "sbp_bank_name": "АГРОПРОМКРЕДИТ"
+      },
+      {
+        "sbp_bank_key": "100000000108",
+        "sbp_bank_name": "Азиатско-Тихоокеанский Банк"
+      },
+      {
+        "sbp_bank_key": "600000000030",
+        "sbp_bank_name": "АИС"
+      },
+      {
+        "sbp_bank_key": "600000000011",
+        "sbp_bank_name": "АйДиСистемс"
+      },
+      {
+        "sbp_bank_key": "600000000017",
+        "sbp_bank_name": "АйДи финансовые технологии"
+      },
+      {
+        "sbp_bank_key": "100000000006",
+        "sbp_bank_name": "АК БАРС БАНК"
+      },
+      {
+        "sbp_bank_key": "100000000107",
+        "sbp_bank_name": "Акибанк"
+      },
+      {
+        "sbp_bank_key": "100000000095",
+        "sbp_bank_name": "Акционерный Банк РОССИЯ"
+      },
+      {
+        "sbp_bank_key": "100000000113",
+        "sbp_bank_name": "Алеф-Банк"
+      },
+      {
+        "sbp_bank_key": "100000000080",
+        "sbp_bank_name": "Алмазэргиэнбанк"
+      },
+      {
+        "sbp_bank_key": "100000000008",
+        "sbp_bank_name": "Альфа-Банк"
+      },
+      {
+        "sbp_bank_key": "120000000008",
+        "sbp_bank_name": "АЛЬФА-БАНК"
+      },
+      {
+        "sbp_bank_key": "100000000204",
+        "sbp_bank_name": "Америкэн Экспресс Банк"
+      },
+      {
+        "sbp_bank_key": "600000000001",
+        "sbp_bank_name": "АО Бифит"
+      },
+      {
+        "sbp_bank_key": "100000000125",
+        "sbp_bank_name": "АО Горбанк"
+      },
+      {
+        "sbp_bank_key": "100000000122",
+        "sbp_bank_name": "АО ИК Банк"
+      },
+      {
+        "sbp_bank_key": "100000000239",
+        "sbp_bank_name": "АО КБ ИС БАНК"
+      },
+      {
+        "sbp_bank_key": "100000000121",
+        "sbp_bank_name": "АО КБ Солидарность"
+      },
+      {
+        "sbp_bank_key": "100000000027",
+        "sbp_bank_name": "АО Кредит Европа Банк"
+      },
+      {
+        "sbp_bank_key": "100000000129",
+        "sbp_bank_name": "АРЕСБАНК"
+      },
+      {
+        "sbp_bank_key": "100000000256",
+        "sbp_bank_name": "Байкалкредобанк"
+      },
+      {
+        "sbp_bank_key": "100000000143",
+        "sbp_bank_name": "Банк 131"
+      },
+      {
+        "sbp_bank_key": "100000000135",
+        "sbp_bank_name": "Банк Акцепт"
+      },
+      {
+        "sbp_bank_key": "100000000049",
+        "sbp_bank_name": "БАНК ВБРР"
+      },
+      {
+        "sbp_bank_key": "100000000082",
+        "sbp_bank_name": "Банк ДОМ.РФ"
+      },
+      {
+        "sbp_bank_key": "100000000090",
+        "sbp_bank_name": "Банк Екатеринбург"
+      },
+      {
+        "sbp_bank_key": "100000000045",
+        "sbp_bank_name": "Банк ЗЕНИТ"
+      },
+      {
+        "sbp_bank_key": "100000000158",
+        "sbp_bank_name": "Банк ИТУРУП"
+      },
+      {
+        "sbp_bank_key": "100000000055",
+        "sbp_bank_name": "БАНК ЙОШКАР-ОЛА"
+      },
+      {
+        "sbp_bank_key": "100000000052",
+        "sbp_bank_name": "Банк Левобережный"
+      },
+      {
+        "sbp_bank_key": "600000000029",
+        "sbp_bank_name": "Банковские информационные системы"
+      },
+      {
+        "sbp_bank_key": "100000000124",
+        "sbp_bank_name": "БАНК ОРЕНБУРГ"
+      },
+      {
+        "sbp_bank_key": "120000000014",
+        "sbp_bank_name": "Банк Русский Стандарт"
+      },
+      {
+        "sbp_bank_key": "100000000014",
+        "sbp_bank_name": "Банк Русский Стандарт"
+      },
+      {
+        "sbp_bank_key": "110000000014",
+        "sbp_bank_name": "Банк Русский Стандарт"
+      },
+      {
+        "sbp_bank_key": "100000000029",
+        "sbp_bank_name": "БАНК САНКТ-ПЕТЕРБУРГ"
+      },
+      {
+        "sbp_bank_key": "100000000126",
+        "sbp_bank_name": "Банк Саратов"
+      },
+      {
+        "sbp_bank_key": "100000000078",
+        "sbp_bank_name": "Банк Союз"
+      },
+      {
+        "sbp_bank_key": "100000000040",
+        "sbp_bank_name": "Банк ФИНАМ"
+      },
+      {
+        "sbp_bank_key": "100000000015",
+        "sbp_bank_name": "Банк ФК Открытие"
+      },
+      {
+        "sbp_bank_key": "120000000015",
+        "sbp_bank_name": "Банк ФК Открытие"
+      },
+      {
+        "sbp_bank_key": "500000000003",
+        "sbp_bank_name": "Бест2пей"
+      },
+      {
+        "sbp_bank_key": "100000000041",
+        "sbp_bank_name": "БКС Банк"
+      },
+      {
+        "sbp_bank_key": "500000000004",
+        "sbp_bank_name": "БПЦ Банковские Технологии"
+      },
+      {
+        "sbp_bank_key": "100000000072",
+        "sbp_bank_name": "Братский АНКБ"
+      },
+      {
+        "sbp_bank_key": "100000000153",
+        "sbp_bank_name": "Венец"
+      },
+      {
+        "sbp_bank_key": "100000000053",
+        "sbp_bank_name": "Веста"
+      },
+      {
+        "sbp_bank_key": "100000000058",
+        "sbp_bank_name": "ВЛАДБИЗНЕСБАНК"
+      },
+      {
+        "sbp_bank_key": "100000000005",
+        "sbp_bank_name": "ВТБ Банк"
+      },
+      {
+        "sbp_bank_key": "100000000001",
+        "sbp_bank_name": "Газпромбанк"
+      },
+      {
+        "sbp_bank_key": "100000000043",
+        "sbp_bank_name": "Газэнергобанк"
+      },
+      {
+        "sbp_bank_key": "100000000112",
+        "sbp_bank_name": "ГАРАНТ-ИНВЕСТ"
+      },
+      {
+        "sbp_bank_key": "100000000037",
+        "sbp_bank_name": "Генбанк"
+      },
+      {
+        "sbp_bank_key": "100000000149",
+        "sbp_bank_name": "ГУТА-БАНК"
+      },
+      {
+        "sbp_bank_key": "100000000070",
+        "sbp_bank_name": "Датабанк"
+      },
+      {
+        "sbp_bank_key": "100000000057",
+        "sbp_bank_name": "Деньги.Мэйл.Ру"
+      },
+      {
+        "sbp_bank_key": "600000000012",
+        "sbp_bank_name": "Диасофт"
+      },
+      {
+        "sbp_bank_key": "110000000207",
+        "sbp_bank_name": "Дойче банк"
+      },
+      {
+        "sbp_bank_key": "100000000207",
+        "sbp_bank_name": "Дойче Банк"
+      },
+      {
+        "sbp_bank_key": "100000000076",
+        "sbp_bank_name": "Единая касса"
+      },
+      {
+        "sbp_bank_key": "500000000001",
+        "sbp_bank_name": "Екассир"
+      },
+      {
+        "sbp_bank_key": "550000000001",
+        "sbp_bank_name": "ЕКассир"
+      },
+      {
+        "sbp_bank_key": "540000000001",
+        "sbp_bank_name": "ЕКассир"
+      },
+      {
+        "sbp_bank_key": "510000000001",
+        "sbp_bank_name": "Екассир два"
+      },
+      {
+        "sbp_bank_key": "520000000001",
+        "sbp_bank_name": "Екассир три"
+      },
+      {
+        "sbp_bank_key": "530000000001",
+        "sbp_bank_name": "Екассир четыре"
+      },
+      {
+        "sbp_bank_key": "500000000005",
+        "sbp_bank_name": "ЗОЛОТАЯ КОРОНА"
+      },
+      {
+        "sbp_bank_key": "530000000005",
+        "sbp_bank_name": "Золотая Корона ТРP"
+      },
+      {
+        "sbp_bank_key": "520000000005",
+        "sbp_bank_name": "Золотая Корона ТРP"
+      },
+      {
+        "sbp_bank_key": "188888888885",
+        "sbp_bank_name": "Золотой Банк"
+      },
+      {
+        "sbp_bank_key": "600000000002",
+        "sbp_bank_name": "Инверсия"
+      },
+      {
+        "sbp_bank_key": "600000000022",
+        "sbp_bank_name": "ИНВОЙС"
+      },
+      {
+        "sbp_bank_key": "600000000018",
+        "sbp_bank_name": "Интервейл"
+      },
+      {
+        "sbp_bank_key": "600000000007",
+        "sbp_bank_name": "Информационные Системы"
+      },
+      {
+        "sbp_bank_key": "100000000067",
+        "sbp_bank_name": "КБ Новый век"
+      },
+      {
+        "sbp_bank_key": "100000000048",
+        "sbp_bank_name": "КБ Платина"
+      },
+      {
+        "sbp_bank_key": "100000000042",
+        "sbp_bank_name": "КБ ЮНИСТРИМ"
+      },
+      {
+        "sbp_bank_key": "100000000054",
+        "sbp_bank_name": "ККБ"
+      },
+      {
+        "sbp_bank_key": "110000000054",
+        "sbp_bank_name": "ККБ Вендор"
+      },
+      {
+        "sbp_bank_key": "100000000089",
+        "sbp_bank_name": "Кольцо Урала"
+      },
+      {
+        "sbp_bank_key": "630000000005",
+        "sbp_bank_name": "Компас Плюс"
+      },
+      {
+        "sbp_bank_key": "640000000005",
+        "sbp_bank_name": "Компас Плюс"
+      },
+      {
+        "sbp_bank_key": "650000000005",
+        "sbp_bank_name": "Компас Плюс"
+      },
+      {
+        "sbp_bank_key": "620000000005",
+        "sbp_bank_name": "Компас Плюс"
+      },
+      {
+        "sbp_bank_key": "610000000005",
+        "sbp_bank_name": "Компас Плюс"
+      },
+      {
+        "sbp_bank_key": "600000000005",
+        "sbp_bank_name": "Компас Плюс"
+      },
+      {
+        "sbp_bank_key": "670000000005",
+        "sbp_bank_name": "Компас Плюс"
+      },
+      {
+        "sbp_bank_key": "660000000005",
+        "sbp_bank_name": "Компас Плюс"
+      },
+      {
+        "sbp_bank_key": "680000000005",
+        "sbp_bank_name": "Компас Плюс"
+      },
+      {
+        "sbp_bank_key": "690000000005",
+        "sbp_bank_name": "Компас Плюс"
+      },
+      {
+        "sbp_bank_key": "100000000146",
+        "sbp_bank_name": "КОШЕЛЕВ-БАНК"
+      },
+      {
+        "sbp_bank_key": "100000000064",
+        "sbp_bank_name": "Кредит Урал Банк"
+      },
+      {
+        "sbp_bank_key": "100000000212",
+        "sbp_bank_name": "Крокус-Банк"
+      },
+      {
+        "sbp_bank_key": "100000000131",
+        "sbp_bank_name": "КС БАНК"
+      },
+      {
+        "sbp_bank_key": "100000000050",
+        "sbp_bank_name": "КУБАНЬ КРЕДИТ"
+      },
+      {
+        "sbp_bank_key": "110000000050",
+        "sbp_bank_name": "КУБАНЬ КРЕДИТ2"
+      },
+      {
+        "sbp_bank_key": "600000000016",
+        "sbp_bank_name": "Ланит Технологии"
+      },
+      {
+        "sbp_bank_key": "600000000033",
+        "sbp_bank_name": "Л-ТЕХ"
+      },
+      {
+        "sbp_bank_key": "100000000140",
+        "sbp_bank_name": "МБ Банк"
+      },
+      {
+        "sbp_bank_key": "100000000046",
+        "sbp_bank_name": "Металлинвестбанк"
+      },
+      {
+        "sbp_bank_key": "100000000136",
+        "sbp_bank_name": "Меткомбанк"
+      },
+      {
+        "sbp_bank_key": "100000000033",
+        "sbp_bank_name": "МИнБанк"
+      },
+      {
+        "sbp_bank_key": "100000000123",
+        "sbp_bank_name": "МОБИ.Деньги"
+      },
+      {
+        "sbp_bank_key": "100000000099",
+        "sbp_bank_name": "Модульбанк"
+      },
+      {
+        "sbp_bank_key": "100000000025",
+        "sbp_bank_name": "МОСКОВСКИЙ КРЕДИТНЫЙ БАНК"
+      },
+      {
+        "sbp_bank_key": "100000000110",
+        "sbp_bank_name": "Москоммерцбанк"
+      },
+      {
+        "sbp_bank_key": "100000000229",
+        "sbp_bank_name": "МС Банк Рус"
+      },
+      {
+        "sbp_bank_key": "100000000246",
+        "sbp_bank_name": "МСП Банк"
+      },
+      {
+        "sbp_bank_key": "600000000027",
+        "sbp_bank_name": "МСТ Компани"
+      },
+      {
+        "sbp_bank_key": "100000000017",
+        "sbp_bank_name": "МТС Банк"
+      },
+      {
+        "sbp_bank_key": "100000000074",
+        "sbp_bank_name": "Народный банк"
+      },
+      {
+        "sbp_bank_key": "100000000241",
+        "sbp_bank_name": "Национальный расчетный депозитарий"
+      },
+      {
+        "sbp_bank_key": "100000000243",
+        "sbp_bank_name": "Национальный стандарт"
+      },
+      {
+        "sbp_bank_key": "100000000134",
+        "sbp_bank_name": "НБД-Банк"
+      },
+      {
+        "sbp_bank_key": "100000000115",
+        "sbp_bank_name": "НИКО-БАНК"
+      },
+      {
+        "sbp_bank_key": "100000000109",
+        "sbp_bank_name": "НКО ЕРП"
+      },
+      {
+        "sbp_bank_key": "100000000061",
+        "sbp_bank_name": "НКО Монета"
+      },
+      {
+        "sbp_bank_key": "100000000062",
+        "sbp_bank_name": "НокссБанк"
+      },
+      {
+        "sbp_bank_key": "600000000003",
+        "sbp_bank_name": "ОВЛ"
+      },
+      {
+        "sbp_bank_key": "510000000006",
+        "sbp_bank_name": "ООО Цифровой Платеж Tест1"
+      },
+      {
+        "sbp_bank_key": "520000000006",
+        "sbp_bank_name": "ООО Цифровой Платеж Tест2"
+      },
+      {
+        "sbp_bank_key": "100000000018",
+        "sbp_bank_name": "ОТП БАНК"
+      },
+      {
+        "sbp_bank_key": "100000000026",
+        "sbp_bank_name": "ПАО Банк Уралсиб"
+      },
+      {
+        "sbp_bank_key": "100000000092",
+        "sbp_bank_name": "ПАО БыстроБанк"
+      },
+      {
+        "sbp_bank_key": "100000000137",
+        "sbp_bank_name": "Первый Дортрансбанк"
+      },
+      {
+        "sbp_bank_key": "100000000087",
+        "sbp_bank_name": "Петербургский социальный коммерческий банк"
+      },
+      {
+        "sbp_bank_key": "1crt88888881",
+        "sbp_bank_name": "ПИР Банк"
+      },
+      {
+        "sbp_bank_key": "100000000068",
+        "sbp_bank_name": "Платежи и Расчёты"
+      },
+      {
+        "sbp_bank_key": "100000000086",
+        "sbp_bank_name": "ПНКО ЭЛПЛАТ"
+      },
+      {
+        "sbp_bank_key": "100000000103",
+        "sbp_bank_name": "Пойдем!"
+      },
+      {
+        "sbp_bank_key": "100000000016",
+        "sbp_bank_name": "Почта Банк"
+      },
+      {
+        "sbp_bank_key": "100000000088",
+        "sbp_bank_name": "ПРИМСОЦБАНК"
+      },
+      {
+        "sbp_bank_key": "100000000228",
+        "sbp_bank_name": "Прио-Внешторгбанк"
+      },
+      {
+        "sbp_bank_key": "100000000117",
+        "sbp_bank_name": "ПроБанк"
+      },
+      {
+        "sbp_bank_key": "100000000010",
+        "sbp_bank_name": "Промсвязьбанк"
+      },
+      {
+        "sbp_bank_key": "600000000028",
+        "sbp_bank_name": "ПЭЙ365"
+      },
+      {
+        "sbp_bank_key": "100000000172",
+        "sbp_bank_name": "Развитие-Столица"
+      },
+      {
+        "sbp_bank_key": "610000000006",
+        "sbp_bank_name": "Райт Лайн 1"
+      },
+      {
+        "sbp_bank_key": "620000000006",
+        "sbp_bank_name": "Райт Лайн 2"
+      },
+      {
+        "sbp_bank_key": "630000000006",
+        "sbp_bank_name": "Райт Лайн 3"
+      },
+      {
+        "sbp_bank_key": "640000000006",
+        "sbp_bank_name": "Райт Лайн 4"
+      },
+      {
+        "sbp_bank_key": "650000000006",
+        "sbp_bank_name": "Райт Лайн 5"
+      },
+      {
+        "sbp_bank_key": "660000000006",
+        "sbp_bank_name": "Райт Лайн 6"
+      },
+      {
+        "sbp_bank_key": "600000000006",
+        "sbp_bank_name": "Райтлайн российская финтехкомпания автоматизируем"
+      },
+      {
+        "sbp_bank_key": "100000000007",
+        "sbp_bank_name": "Райффайзенбанк"
+      },
+      {
+        "sbp_bank_key": "100000000145",
+        "sbp_bank_name": "Расчетные решения"
+      },
+      {
+        "sbp_bank_key": "100000000187",
+        "sbp_bank_name": "РЕСО Кредит"
+      },
+      {
+        "sbp_bank_key": "100000000011",
+        "sbp_bank_name": "РНКБ БАНК"
+      },
+      {
+        "sbp_bank_key": "100000000002",
+        "sbp_bank_name": "РНКО Платежный центр"
+      },
+      {
+        "sbp_bank_key": "100000000012",
+        "sbp_bank_name": "Росбанк"
+      },
+      {
+        "sbp_bank_key": "120000000084",
+        "sbp_bank_name": "РосДорБанк"
+      },
+      {
+        "sbp_bank_key": "100000000084",
+        "sbp_bank_name": "РосДорБанк"
+      },
+      {
+        "sbp_bank_key": "100000000020",
+        "sbp_bank_name": "РОССЕЛЬХОЗБАНК"
+      },
+      {
+        "sbp_bank_key": "100000000098",
+        "sbp_bank_name": "РОСТФИНАНС"
+      },
+      {
+        "sbp_bank_key": "100000000104",
+        "sbp_bank_name": "Русское финансовое общество"
+      },
+      {
+        "sbp_bank_key": "100000000147",
+        "sbp_bank_name": "САРОВБИЗНЕСБАНК"
+      },
+      {
+        "sbp_bank_key": "110000000111",
+        "sbp_bank_name": "Сбербанк2"
+      },
+      {
+        "sbp_bank_key": "100000000069",
+        "sbp_bank_name": "СДМ-БАНК"
+      },
+      {
+        "sbp_bank_key": "100000000208",
+        "sbp_bank_name": "Северный Народный Банк"
+      },
+      {
+        "sbp_bank_key": "100000000166",
+        "sbp_bank_name": "СИБСОЦБАНК"
+      },
+      {
+        "sbp_bank_key": "600000000004",
+        "sbp_bank_name": "Синимекс-Информатика"
+      },
+      {
+        "sbp_bank_key": "100000000128",
+        "sbp_bank_name": "Ситибанк"
+      },
+      {
+        "sbp_bank_key": "100000000003",
+        "sbp_bank_name": "СКБ-банк"
+      },
+      {
+        "sbp_bank_key": "100000000169",
+        "sbp_bank_name": "СКС"
+      },
+      {
+        "sbp_bank_key": "100000000036",
+        "sbp_bank_name": "СМП Банк"
+      },
+      {
+        "sbp_bank_key": "100000000013",
+        "sbp_bank_name": "Совкомбанк"
+      },
+      {
+        "sbp_bank_key": "600000000021",
+        "sbp_bank_name": "Солантек"
+      },
+      {
+        "sbp_bank_key": "100000000193",
+        "sbp_bank_name": "Стройлесбанк"
+      },
+      {
+        "sbp_bank_key": "100000000091",
+        "sbp_bank_name": "Сургутнефтегазбанк"
+      },
+      {
+        "sbp_bank_key": "600000000031",
+        "sbp_bank_name": "Теко"
+      },
+      {
+        "sbp_bank_key": "100000000034",
+        "sbp_bank_name": "ТКБ БАНК ПАО"
+      },
+      {
+        "sbp_bank_key": "100000000152",
+        "sbp_bank_name": "Тольяттихимбанк"
+      },
+      {
+        "sbp_bank_key": "100000000065",
+        "sbp_bank_name": "Точка"
+      },
+      {
+        "sbp_bank_key": "100000000093",
+        "sbp_bank_name": "Углеметбанк"
+      },
+      {
+        "sbp_bank_key": "100000000142",
+        "sbp_bank_name": "УРАЛПРОМБАНК"
+      },
+      {
+        "sbp_bank_key": "100000000151",
+        "sbp_bank_name": "Урал ФД"
+      },
+      {
+        "sbp_bank_key": "100000000031",
+        "sbp_bank_name": "Уральский банк реконструкции и развития"
+      },
+      {
+        "sbp_bank_key": "600000000020",
+        "sbp_bank_name": "Финист-софт"
+      },
+      {
+        "sbp_bank_key": "600000000015",
+        "sbp_bank_name": "ФинСтрим"
+      },
+      {
+        "sbp_bank_key": "100000000127",
+        "sbp_bank_name": "Хакасский муниципальный банк"
+      },
+      {
+        "sbp_bank_key": "100000000024",
+        "sbp_bank_name": "ХКФ Банк"
+      },
+      {
+        "sbp_bank_key": "100000000056",
+        "sbp_bank_name": "Хлынов"
+      },
+      {
+        "sbp_bank_key": "100000000059",
+        "sbp_bank_name": "Центр-инвест"
+      },
+      {
+        "sbp_bank_key": "110000000059",
+        "sbp_bank_name": "Центр-инвест 1"
+      },
+      {
+        "sbp_bank_key": "600000000008",
+        "sbp_bank_name": "Цифровые платежи"
+      },
+      {
+        "sbp_bank_key": "100000000094",
+        "sbp_bank_name": "ЧЕЛЯБИНВЕСТБАНК"
+      },
+      {
+        "sbp_bank_key": "100000000044",
+        "sbp_bank_name": "Экспобанк"
+      },
+      {
+        "sbp_bank_key": "999999999999",
+        "sbp_bank_name": "ЭМУЛЯТОР"
+      },
+      {
+        "sbp_bank_key": "999999999998",
+        "sbp_bank_name": "ЭМУЛЯТОР2"
+      },
+      {
+        "sbp_bank_key": "100000000139",
+        "sbp_bank_name": "ЭНЕРГОТРАНСБАНК"
+      },
+      {
+        "sbp_bank_key": "600000000025",
+        "sbp_bank_name": "ЭПАМ Систэмз"
+      },
+      {
+        "sbp_bank_key": "600000000019",
+        "sbp_bank_name": "Эр-Стайл Софтлаб"
+      },
+      {
+        "sbp_bank_key": "100000000105",
+        "sbp_bank_name": "Эс-Би-Ай Банк"
+      },
+      {
+        "sbp_bank_key": "600000000032",
+        "sbp_bank_name": "ЭсБиСи Технологии"
+      },
+      {
+        "sbp_bank_key": "100000000160",
+        "sbp_bank_name": "ЮГ-Инвестбанк"
+      },
+      {
+        "sbp_bank_key": "100000000030",
+        "sbp_bank_name": "ЮниКредит Банк"
+      },
+      {
+        "sbp_bank_key": "100000000022",
+        "sbp_bank_name": "ЯНДЕКС.ДЕНЬГИ"
+      }
+    ]
+  }
+}

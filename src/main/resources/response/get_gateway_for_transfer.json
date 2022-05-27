@@ -1,0 +1,9 @@
+{
+  "hmac": "2340e86d1ef342e2ce0751d7db378fe3",
+  "response": {
+    "status": "SUCCESS",
+    "message": "",
+    "gateway_name": "ТКБ",
+    "gateway_form_url": "https://www.vivadengi.ru/"
+  }
+}

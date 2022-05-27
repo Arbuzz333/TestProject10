@@ -1,0 +1,10 @@
+{
+  "hmac": "9339f20da5798da1b475dac153eb8ee8",
+  "response": {
+    "status": "SUCCESS",
+    "message": "",
+    "card_mask": "00123**456",
+    "card_expiration_date": "2022-05-12",
+    "payment_system_name": "test payment system name"
+  }
+}

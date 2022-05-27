@@ -1,0 +1,9 @@
+{
+  "hmac": "27d1ea3f45de474530c13ac537f7f19c",
+  "response": {
+    "status": "SUCCESS",
+    "message": "",
+    "tkb_url": "https://paytest.online.tkbbank.ru/payment/9WcQAA",
+    "tkb_req_id": "Bind_lite_DEV_198"
+  }
+}
