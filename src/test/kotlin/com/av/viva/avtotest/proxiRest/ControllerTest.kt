@@ -7,7 +7,11 @@ import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.core.io.ClassPathResource
+import org.springframework.http.MediaType
 import org.springframework.test.web.reactive.server.WebTestClient
+import org.springframework.util.StreamUtils
+import java.nio.charset.Charset
 import java.time.Duration
 
 
@@ -288,6 +292,49 @@ class ControllerTest {
             .responseBody
 
         assertNotNull(cards?.get("banks"))
+
+        println(cards)
+    }
+
+    @Test
+    fun getLoanTarget(@Autowired webClient: WebTestClient) {
+        val cards = webClient.get()
+            .uri { u ->
+                u.path("/api/address/get-loan-target")
+                    .host("localhost").port(8080).build()
+            }
+            .exchange()
+            .expectStatus()
+            .is2xxSuccessful
+            .expectBody(JsonNode::class.java)
+            .returnResult()
+            .responseBody
+
+        assertNotNull(cards?.get("items"))
+
+        println(cards)
+    }
+
+    @Test
+    fun loanAppReview(@Autowired webClient: WebTestClient) {
+        val resource = ClassPathResource("/request/loanapp-review.json")
+        val json = StreamUtils.copyToString(resource.inputStream, Charset.forName("UTF-8"))
+
+        val cards = webClient.post()
+            .uri { u ->
+                u.path("/api/address/loanapp-review")
+                    .host("localhost").port(8080).build()
+            }
+            .contentType(MediaType.APPLICATION_JSON)
+            .bodyValue(json)
+            .exchange()
+            .expectStatus()
+            .is2xxSuccessful
+            .expectBody(JsonNode::class.java)
+            .returnResult()
+            .responseBody
+
+        assertEquals(cards?.get("status")?.asText(), "SUCCESS")
 
         println(cards)
     }

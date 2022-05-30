@@ -3,7 +3,7 @@
   "response": {
     "status": "SUCCESS",
     "message": "",
-    "card_token": "test card token",
+    "tkb_card_token": "test tkb card token",
     "tkb_status": "test tkb status",
     "tkb_mistake_description": ""
 
