@@ -34,7 +34,7 @@ class TransferBpmsTest {
         val resourceTransferCard = ClassPathResource("/request/transfer-type-card.json")
         var jsonTransferCard = StreamUtils.copyToString(resourceTransferCard.inputStream, Charset.forName("UTF-8"))
         jsonTransferCard = jsonTransferCard.replace(baseBQ, bq, false)
-        println("JSON start transfer $jsonTransferCard")
+        println("JSON transfer type card $jsonTransferCard")
 
         val responseTransferCard = postWebClient(webClient, jsonTransferCard)
         assertEquals(responseTransferCard?.get(0)?.get("resultType")?.asText(), "Execution")
@@ -42,7 +42,35 @@ class TransferBpmsTest {
         val resourceInputCard = ClassPathResource("/request/tkb-input-success-card.json")
         var jsonInputCard = StreamUtils.copyToString(resourceInputCard.inputStream, Charset.forName("UTF-8"))
         jsonInputCard = jsonInputCard.replace(baseBQ, bq, false)
-        println("JSON start transfer $jsonInputCard")
+        println("JSON input success card $jsonInputCard")
+
+        val responseInputCard = postWebClient(webClient, jsonInputCard)
+        assertEquals(responseInputCard?.get(0)?.get("resultType")?.asText(), "Execution")
+    }
+
+    @Test
+    fun clientCard(@Autowired webClient: WebTestClient) {
+        val bq = baseBQ.replace("0081", randomDigits(5).toString())
+        val resource = ClassPathResource("/request/start-transfer.json")
+        var json = StreamUtils.copyToString(resource.inputStream, Charset.forName("UTF-8"))
+        json = json.replace(baseBQ, bq, false)
+        println("JSON start transfer $json")
+
+        val response = postWebClient(webClient, json)
+        assertEquals(response?.get(0)?.get("resultType")?.asText(), "ProcessDefinition")
+
+        val resourceTransferCard = ClassPathResource("/request/transfer-type-card.json")
+        var jsonTransferCard = StreamUtils.copyToString(resourceTransferCard.inputStream, Charset.forName("UTF-8"))
+        jsonTransferCard = jsonTransferCard.replace(baseBQ, bq, false)
+        println("JSON transfer type card $jsonTransferCard")
+
+        val responseTransferCard = postWebClient(webClient, jsonTransferCard)
+        assertEquals(responseTransferCard?.get(0)?.get("resultType")?.asText(), "Execution")
+
+        val resourceInputCard = ClassPathResource("/request/client-decline.json")
+        var jsonInputCard = StreamUtils.copyToString(resourceInputCard.inputStream, Charset.forName("UTF-8"))
+        jsonInputCard = jsonInputCard.replace(baseBQ, bq, false)
+        println("JSON client decline card $jsonInputCard")
 
         val responseInputCard = postWebClient(webClient, jsonInputCard)
         assertEquals(responseInputCard?.get(0)?.get("resultType")?.asText(), "Execution")
@@ -62,7 +90,7 @@ class TransferBpmsTest {
         val resourceTransferSbp = ClassPathResource("/request/transfer-type-sbp.json")
         var jsonTransferSbp = StreamUtils.copyToString(resourceTransferSbp.inputStream, Charset.forName("UTF-8"))
         jsonTransferSbp = jsonTransferSbp.replace(baseBQ, bq, false)
-        println("JSON start transfer $jsonTransferSbp")
+        println("JSON transfer type $jsonTransferSbp")
 
         val responseTransferSbp = postWebClient(webClient, jsonTransferSbp)
         assertEquals(responseTransferSbp?.get(0)?.get("resultType")?.asText(), "Execution")
@@ -70,10 +98,38 @@ class TransferBpmsTest {
         val resourceInputSbp = ClassPathResource("/request/tkb-input-success-sbp.json")
         var jsonInputSbp = StreamUtils.copyToString(resourceInputSbp.inputStream, Charset.forName("UTF-8"))
         jsonInputSbp = jsonInputSbp.replace(baseBQ, bq, false)
-        println("JSON start transfer $jsonInputSbp")
+        println("JSON input success $jsonInputSbp")
 
         val responseInputSbp = postWebClient(webClient, jsonInputSbp)
         assertEquals(responseInputSbp?.get(0)?.get("resultType")?.asText(), "Execution")
+    }
+
+    @Test
+    fun clientDeclineSbp(@Autowired webClient: WebTestClient) {
+        val bq = baseBQ.replace("0081", randomDigits(5).toString())
+        val resource = ClassPathResource("/request/start-transfer.json")
+        var json = StreamUtils.copyToString(resource.inputStream, Charset.forName("UTF-8"))
+        json = json.replace(baseBQ, bq, false)
+        println("JSON start transfer $json")
+
+        val response = postWebClient(webClient, json)
+        assertEquals(response?.get(0)?.get("resultType")?.asText(), "ProcessDefinition")
+
+        val resourceTransferSbp = ClassPathResource("/request/transfer-type-sbp.json")
+        var jsonTransferSbp = StreamUtils.copyToString(resourceTransferSbp.inputStream, Charset.forName("UTF-8"))
+        jsonTransferSbp = jsonTransferSbp.replace(baseBQ, bq, false)
+        println("JSON transfer type $jsonTransferSbp")
+
+        val responseTransferSbp = postWebClient(webClient, jsonTransferSbp)
+        assertEquals(responseTransferSbp?.get(0)?.get("resultType")?.asText(), "Execution")
+
+        val resourceDecline = ClassPathResource("/request/client-decline.json")
+        var jsonDecline = StreamUtils.copyToString(resourceDecline.inputStream, Charset.forName("UTF-8"))
+        jsonDecline = jsonDecline.replace(baseBQ, bq, false)
+        println("JSON client decline $jsonDecline")
+
+        val responseDecline = postWebClient(webClient, jsonDecline)
+        assertEquals(responseDecline?.get(0)?.get("resultType")?.asText(), "Execution")
     }
 
     fun postWebClient(webClient: WebTestClient, json: String): JsonNode? {

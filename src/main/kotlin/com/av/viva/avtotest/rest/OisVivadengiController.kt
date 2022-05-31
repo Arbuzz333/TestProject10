@@ -1,5 +1,6 @@
 package com.av.viva.avtotest.rest
 
+import com.av.viva.avtotest.config.AppTestProperties
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.springframework.core.io.ClassPathResource
@@ -13,7 +14,11 @@ import java.nio.charset.Charset
 
 @RestController
 @RequestMapping("/ois-vivadengi")
-class OisVivadengiController {
+class OisVivadengiController(
+    val appTestProperties: AppTestProperties
+) {
+
+    var vivaService = ArrayDeque(listOf("ТКБ", "Монета"))
 
     @PostMapping("/get_moneta_card_data", consumes = [APPLICATION_FORM_URLENCODED_VALUE, APPLICATION_OCTET_STREAM_VALUE], produces = [APPLICATION_JSON_VALUE])
     fun getMonetaCardData(
@@ -46,14 +51,13 @@ class OisVivadengiController {
     ): JsonNode? {
         println(jsonNode)
         println("\n")
-        val resource = ClassPathResource("/response/get_sbp_possibility_transfer.json")
+        val resource = if(appTestProperties.isSbpPossibilityTransfer) ClassPathResource("/response/status-success.json")
+        else ClassPathResource("/response/status-fail.json")
         val json = StreamUtils.copyToString(resource.inputStream, Charset.forName("UTF-8"))
         println("JSON get_sbp_possibility_transfer $json")
         val mapper = ObjectMapper()
         return mapper.readTree(resource.inputStream)
     }
-
-    var vivaService = ArrayDeque(listOf("ТКБ", "Монета"))
 
     @PostMapping("/get_gateway_for_transfer", consumes = [APPLICATION_FORM_URLENCODED_VALUE, APPLICATION_OCTET_STREAM_VALUE], produces = [APPLICATION_JSON_VALUE])
     fun getGatewayForTransfer(
@@ -79,7 +83,8 @@ class OisVivadengiController {
     ): JsonNode? {
         println(jsonNode)
         println("\n")
-        val resource = ClassPathResource("/response/get_tkb_card_data.json")
+        val resource = if (appTestProperties.isTkbCardData) ClassPathResource("/response/get_tkb_card_data.json")
+        else ClassPathResource("/response/status-fail.json")
         val json = StreamUtils.copyToString(resource.inputStream, Charset.forName("UTF-8"))
         println("JSON get_tkb_card_data $json")
         val mapper = ObjectMapper()
