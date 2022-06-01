@@ -18,7 +18,7 @@ class OisVivadengiController(
     val appTestProperties: AppTestProperties
 ) {
 
-    var vivaService = ArrayDeque(listOf("ТКБ", "Монета"))
+    var vivaService = mapOf("tkb" to "ТКБ", "moneta" to "Монета")
 
     @PostMapping("/get_moneta_card_data", consumes = [APPLICATION_FORM_URLENCODED_VALUE, APPLICATION_OCTET_STREAM_VALUE], produces = [APPLICATION_JSON_VALUE])
     fun getMonetaCardData(
@@ -27,10 +27,11 @@ class OisVivadengiController(
         println(jsonNode)
         println("\n")
         val resource = ClassPathResource("/response/get_moneta_card_data.json")
-        val json = StreamUtils.copyToString(resource.inputStream, Charset.forName("UTF-8"))
+        var json = StreamUtils.copyToString(resource.inputStream, Charset.forName("UTF-8"))
+        json = if (appTestProperties.isMonetaCardData) json else json.replace("SUCCESS", "FAIL")
         println("JSON get_moneta_card_data $json")
         val mapper = ObjectMapper()
-        return mapper.readTree(resource.inputStream)
+        return mapper.readTree(json)
     }
 
     @PostMapping("/get_sbp_bank_list", consumes = [APPLICATION_FORM_URLENCODED_VALUE, APPLICATION_OCTET_STREAM_VALUE], produces = [APPLICATION_JSON_VALUE])
@@ -67,11 +68,7 @@ class OisVivadengiController(
         println("\n")
         val resource = ClassPathResource("/response/get_gateway_for_transfer.json")
         var json = StreamUtils.copyToString(resource.inputStream, Charset.forName("UTF-8"))
-        json = if (vivaService.isEmpty()) {
-            vivaService.add("ТКБ")
-            vivaService.add("Монета")
-            json.replace("XXX", vivaService.removeLast())
-        } else json.replace("XXX", vivaService.removeLast())
+        json = json.replace("XXX", vivaService[appTestProperties.gatewayName] ?: "???")
         println("JSON get_gateway_for_transfer $json")
         val mapper = ObjectMapper()
         return mapper.readTree(json)

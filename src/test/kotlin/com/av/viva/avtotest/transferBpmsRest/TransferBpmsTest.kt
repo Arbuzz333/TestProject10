@@ -21,7 +21,34 @@ class TransferBpmsTest {
     }
 
     @Test
-    fun processStartCard(@Autowired webClient: WebTestClient) {
+    fun processStartMonetaCard(@Autowired webClient: WebTestClient) {
+        val bq = baseBQ.replace("0081", randomDigits(5).toString())
+        val resource = ClassPathResource("/request/start-transfer.json")
+        var json = StreamUtils.copyToString(resource.inputStream, Charset.forName("UTF-8"))
+        json = json.replace(baseBQ, bq, false)
+        println("JSON start transfer $json")
+
+        val response = postWebClient(webClient, json)
+        assertEquals(response?.get(0)?.get("resultType")?.asText(), "ProcessDefinition")
+
+        val resourceTransferCard = ClassPathResource("/request/transfer-type-card.json")
+        var jsonTransferCard = StreamUtils.copyToString(resourceTransferCard.inputStream, Charset.forName("UTF-8"))
+        jsonTransferCard = jsonTransferCard.replace(baseBQ, bq, false)
+        println("JSON transfer type card $jsonTransferCard")
+
+        val responseTransferCard = postWebClient(webClient, jsonTransferCard)
+        assertEquals(responseTransferCard?.get(0)?.get("resultType")?.asText(), "Execution")
+
+        val resourceDataCard = ClassPathResource("/request/moneta-data-card.json")
+        var jsonDataCard = StreamUtils.copyToString(resourceDataCard.inputStream, Charset.forName("UTF-8"))
+        jsonDataCard = jsonDataCard.replace(baseBQ, bq, false)
+        println("JSON moneta data card $jsonDataCard")
+        val responseDataCard = postWebClient(webClient, jsonDataCard)
+        assertEquals(responseDataCard?.get(0)?.get("resultType")?.asText(), "Execution")
+    }
+
+    @Test
+    fun processStartTkbCard(@Autowired webClient: WebTestClient) {
         val bq = baseBQ.replace("0081", randomDigits(5).toString())
         val resource = ClassPathResource("/request/start-transfer.json")
         var json = StreamUtils.copyToString(resource.inputStream, Charset.forName("UTF-8"))
@@ -49,7 +76,7 @@ class TransferBpmsTest {
     }
 
     @Test
-    fun clientCard(@Autowired webClient: WebTestClient) {
+    fun clientDeclineCard(@Autowired webClient: WebTestClient) {
         val bq = baseBQ.replace("0081", randomDigits(5).toString())
         val resource = ClassPathResource("/request/start-transfer.json")
         var json = StreamUtils.copyToString(resource.inputStream, Charset.forName("UTF-8"))

@@ -9,5 +9,10 @@ import org.springframework.boot.context.properties.ConstructorBinding;
 data class AppTestProperties(
 
     val isSbpPossibilityTransfer: Boolean,
-    val isTkbCardData: Boolean
+    val isTkbCardData: Boolean,
+    val isMonetaCardData: Boolean,
+    /**
+     * "ТКБ", "Монета"
+     */
+    val gatewayName: String
 )

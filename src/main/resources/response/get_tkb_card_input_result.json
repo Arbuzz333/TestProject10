@@ -4,7 +4,7 @@
     "status": "SUCCESS",
     "message": "",
     "tkb_card_token": "test tkb card token",
-    "tkb_status": "test tkb status",
+    "tkb_status": "SUCCESS",
     "tkb_mistake_description": ""
 
   }

@@ -1,0 +1,11 @@
+{
+  "messageName" : "moneta-data",
+  "businessKey" : "viva.startMain0081",
+  "processVariables" : {
+    "moneta-card-data" : {
+      "value" : "{\"moneta_result\": \"SUCCESS\",\"moneta_card_token\": \"dfgp2423ogope\"}",
+      "type" : "String"
+    }
+  },
+  "resultEnabled" : true
+}

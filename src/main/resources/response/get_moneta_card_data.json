@@ -3,6 +3,8 @@
   "response": {
     "status": "SUCCESS",
     "message": "",
-    "moneta_result": "NOTALLOWED"
+    "moneta_result": "SUCCESS",
+    "card_mask": "123***123",
+    "card_expiration_data": "10-2027"
   }
 }
