@@ -176,4 +176,90 @@ class TransferBpmsTest {
         return response
     }
 
+    @Test
+    fun transferMonetaProxy(@Autowired webClient: WebTestClient) {
+        val (sessionIdTwo, businessKeyTwo) = getSessionBusiness(webClient)
+        processProxyMonetaCard(webClient, businessKeyTwo ?: "", sessionIdTwo ?: "")
+    }
+
+    @Test
+    fun transferTkbProxy(@Autowired webClient: WebTestClient) {
+        val (sessionId, businessKey) = getSessionBusiness(webClient)
+        processProxyTkbCard(webClient, businessKey ?: "", sessionId ?: "")
+    }
+
+    fun getSessionBusiness(webClient: WebTestClient): Pair<String?, String?> {
+        val sessionId = webClient.get().uri { u ->
+            u.path("/api/session").host("localhost").port(8076).build()
+        }
+            .exchange()
+            .expectStatus()
+            .is2xxSuccessful
+            .expectBody(String::class.java)
+            .returnResult()
+            .responseBody
+
+        println("SessionId: $sessionId")
+
+        val businessKey = webClient.post().uri { u ->
+            u.path("/api/process/start").host("localhost").port(8076).build()
+        }
+            .cookie("viva_session_id", sessionId ?: "")
+            .exchange()
+            .expectStatus()
+            .is2xxSuccessful
+            .expectBody(String::class.java)
+            .returnResult()
+            .responseBody
+
+        println("BusinessKey: $businessKey")
+        return sessionId to businessKey
+    }
+
+    fun postProxyWebClient(webClient: WebTestClient, json: String, sessionId: String = ""): JsonNode? {
+        val response = webClient.post().uri { u ->
+            u.path("api/process/message").host("localhost").port(8076).build()
+        }
+            .cookie("viva_session_id", sessionId)
+            .contentType(MediaType.APPLICATION_JSON)
+            .bodyValue(json)
+            .exchange()
+            .expectStatus()
+            .is2xxSuccessful
+            .expectBody(JsonNode::class.java)
+            .returnResult()
+            .responseBody
+
+        println("RESPONSE $response")
+        return response
+    }
+
+    fun processProxyTkbCard(webClient: WebTestClient, businessKey: String, sessionId: String) {
+        val resourceTransferCard = ClassPathResource("/request/proxy/transfer-type-card.json")
+        val jsonTransferCard = StreamUtils.copyToString(resourceTransferCard.inputStream, Charset.forName("UTF-8"))
+        println("JSON transfer type card $jsonTransferCard")
+
+        postProxyWebClient(webClient, jsonTransferCard, sessionId)
+
+        val resourceInputCard = ClassPathResource("/request/proxy/tkb-input-success-card.json")
+        val jsonInputCard = StreamUtils.copyToString(resourceInputCard.inputStream, Charset.forName("UTF-8"))
+        println("JSON input success card $jsonInputCard")
+
+        postProxyWebClient(webClient, jsonInputCard, sessionId)
+    }
+
+    fun processProxyMonetaCard(webClient: WebTestClient, businessKey: String, sessionId: String = "") {
+        val resourceTransferCard = ClassPathResource("/request/proxy/transfer-type-card.json")
+        val jsonTransferCard = StreamUtils.copyToString(resourceTransferCard.inputStream, Charset.forName("UTF-8"))
+        println("JSON transfer type card $jsonTransferCard")
+
+        postProxyWebClient(webClient, jsonTransferCard, sessionId)
+
+        val resourceInputCard = ClassPathResource("/request/proxy/moneta-data-card.json")
+        val jsonInputCard = StreamUtils.copyToString(resourceInputCard.inputStream, Charset.forName("UTF-8"))
+        println("JSON input success card $jsonInputCard")
+
+        postProxyWebClient(webClient, jsonInputCard, sessionId)
+    }
+
 }
