@@ -1,5 +1,6 @@
 package com.av.viva.avtotest.transferBpmsRest
 
+import com.av.viva.avtotest.config.AppTestProperties
 import com.fasterxml.jackson.databind.JsonNode
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
@@ -15,6 +16,9 @@ import java.nio.charset.Charset
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class TransferBpmsTest {
+
+    @Autowired
+    lateinit var properties: AppTestProperties
 
     companion object{
         const val baseBQ = "viva.startMain0081"
@@ -188,6 +192,24 @@ class TransferBpmsTest {
         processProxyTkbCard(webClient, businessKey ?: "", sessionId ?: "")
     }
 
+    @Test
+    fun transferSbpProxy(@Autowired webClient: WebTestClient) {
+        val (sessionId, businessKey) = getSessionBusiness(webClient)
+        processProxySbp(webClient, businessKey ?: "", sessionId ?: "")
+    }
+
+    @Test
+    fun transferDeclineCardProxy(@Autowired webClient: WebTestClient) {
+        val (sessionId, businessKey) = getSessionBusiness(webClient)
+        clientProxyDeclineCard(webClient, businessKey ?: "", sessionId ?: "")
+    }
+
+    @Test
+    fun transferDeclineSbpProxy(@Autowired webClient: WebTestClient) {
+        val (sessionId, businessKey) = getSessionBusiness(webClient)
+        clientProxyDeclineSbp(webClient, businessKey ?: "", sessionId ?: "")
+    }
+
     fun getSessionBusiness(webClient: WebTestClient): Pair<String?, String?> {
         val sessionId = webClient.get().uri { u ->
             u.path("/api/session").host("localhost").port(8076).build()
@@ -202,7 +224,7 @@ class TransferBpmsTest {
         println("SessionId: $sessionId")
 
         val businessKey = webClient.post().uri { u ->
-            u.path("/api/process/start").host("localhost").port(8076).build()
+            u.path("/api/process/start").host(properties.transferProxyHost).port(properties.transferProxyPort).build()
         }
             .cookie("viva_session_id", sessionId ?: "")
             .exchange()
@@ -216,9 +238,9 @@ class TransferBpmsTest {
         return sessionId to businessKey
     }
 
-    fun postProxyWebClient(webClient: WebTestClient, json: String, sessionId: String = ""): JsonNode? {
+    fun postProxyWebClient(webClient: WebTestClient, json: String, sessionId: String): JsonNode? {
         val response = webClient.post().uri { u ->
-            u.path("api/process/message").host("localhost").port(8076).build()
+            u.path("api/process/message").host(properties.transferProxyHost).port(properties.transferProxyPort).build()
         }
             .cookie("viva_session_id", sessionId)
             .contentType(MediaType.APPLICATION_JSON)
@@ -260,6 +282,48 @@ class TransferBpmsTest {
         println("JSON input success card $jsonInputCard")
 
         postProxyWebClient(webClient, jsonInputCard, sessionId)
+    }
+
+    fun processProxySbp(webClient: WebTestClient, bq: String, sessionId: String) {
+        val resourceTransferSbp = ClassPathResource("/request/proxy/transfer-type-sbp.json")
+        val jsonTransferSbp = StreamUtils.copyToString(resourceTransferSbp.inputStream, Charset.forName("UTF-8"))
+        println("JSON transfer type $jsonTransferSbp")
+
+        postProxyWebClient(webClient, jsonTransferSbp, sessionId)
+
+        val resourceInputSbp = ClassPathResource("/request/proxy/tkb-input-success-sbp.json")
+        val jsonInputSbp = StreamUtils.copyToString(resourceInputSbp.inputStream, Charset.forName("UTF-8"))
+        println("JSON input success $jsonInputSbp")
+
+        postProxyWebClient(webClient, jsonInputSbp, sessionId)
+    }
+
+    fun clientProxyDeclineCard(webClient: WebTestClient, bq: String, sessionId: String) {
+        val resourceTransferCard = ClassPathResource("/request/proxy/transfer-type-card.json")
+        val jsonTransferCard = StreamUtils.copyToString(resourceTransferCard.inputStream, Charset.forName("UTF-8"))
+        println("JSON transfer type card $jsonTransferCard")
+
+        postProxyWebClient(webClient, jsonTransferCard, sessionId)
+
+        val resourceInputCard = ClassPathResource("/request/proxy/client-decline.json")
+        val jsonInputCard = StreamUtils.copyToString(resourceInputCard.inputStream, Charset.forName("UTF-8"))
+        println("JSON client decline card $jsonInputCard")
+
+        postProxyWebClient(webClient, jsonInputCard, sessionId)
+    }
+
+    fun clientProxyDeclineSbp(webClient: WebTestClient, bq: String, sessionId: String) {
+        val resourceTransferSbp = ClassPathResource("/request/proxy/transfer-type-sbp.json")
+        val jsonTransferSbp = StreamUtils.copyToString(resourceTransferSbp.inputStream, Charset.forName("UTF-8"))
+        println("JSON transfer type $jsonTransferSbp")
+
+        postProxyWebClient(webClient, jsonTransferSbp, sessionId)
+
+        val resourceDecline = ClassPathResource("/request/proxy/client-decline.json")
+        val jsonDecline = StreamUtils.copyToString(resourceDecline.inputStream, Charset.forName("UTF-8"))
+        println("JSON client decline $jsonDecline")
+
+        postProxyWebClient(webClient, jsonDecline, sessionId)
     }
 
 }

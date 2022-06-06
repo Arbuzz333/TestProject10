@@ -14,5 +14,7 @@ data class AppTestProperties(
     /**
      * "ТКБ", "Монета"
      */
-    val gatewayName: String
+    val gatewayName: String,
+    val transferProxyHost: String,
+    val transferProxyPort: Int
 )
