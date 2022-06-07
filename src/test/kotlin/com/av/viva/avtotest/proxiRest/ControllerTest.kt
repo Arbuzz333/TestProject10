@@ -1,9 +1,9 @@
 package com.av.viva.avtotest.proxiRest
 
+import com.av.viva.avtotest.proxiRest.model.CalcLoanParamsRq
 import com.av.viva.avtotest.proxiRest.model.MessageRq
 import com.fasterxml.jackson.databind.JsonNode
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertNotNull
+import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -315,14 +315,10 @@ class ControllerTest {
         println(cards)
     }
 
-    @Test
-    fun loanAppReview(@Autowired webClient: WebTestClient) {
-        val resource = ClassPathResource("/request/loanapp-review.json")
-        val json = StreamUtils.copyToString(resource.inputStream, Charset.forName("UTF-8"))
-
-        val cards = webClient.post()
+    fun postWebClient(webClient: WebTestClient, json: Any, method: String): JsonNode? {
+        return webClient.post()
             .uri { u ->
-                u.path("/api/address/loanapp-review")
+                u.path("/api/address/$method")
                     .host("localhost").port(8080).build()
             }
             .contentType(MediaType.APPLICATION_JSON)
@@ -333,9 +329,24 @@ class ControllerTest {
             .expectBody(JsonNode::class.java)
             .returnResult()
             .responseBody
+    }
+
+    @Test
+    fun loanAppReview(@Autowired webClient: WebTestClient) {
+        val resource = ClassPathResource("/request/loanapp-review.json")
+        val json = StreamUtils.copyToString(resource.inputStream, Charset.forName("UTF-8"))
+        val cards = postWebClient(webClient, json, "loanapp-review")
 
         assertEquals(cards?.get("status")?.asText(), "SUCCESS")
-
         println(cards)
+    }
+
+    @Test
+    fun calcLoanParams(@Autowired webClient: WebTestClient) {
+        val rq = CalcLoanParamsRq("abcdef-ghijklmop-qrstuv-wxyz", 1000, "true")
+        val response = postWebClient(webClient, rq, "calc_loan_params")
+
+        assertTrue(response?.get("loan_terms")?.isArray ?: false)
+        println(response)
     }
 }
