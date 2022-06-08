@@ -1,7 +1,6 @@
 package com.av.viva.avtotest.proxiRest
 
-import com.av.viva.avtotest.proxiRest.model.CalcLoanParamsRq
-import com.av.viva.avtotest.proxiRest.model.MessageRq
+import com.av.viva.avtotest.proxiRest.model.*
 import com.fasterxml.jackson.databind.JsonNode
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
@@ -141,9 +140,6 @@ class ControllerTest {
             .expectBody(List::class.java)
             .returnResult()
             .responseBody
-
-//        val reg = cards as List<LinkedHashMap<String, String>>
-//        assertNotNull(reg.filter { it["region_name"] == "Вологодская" })
 
         println(cards)
     }
@@ -347,6 +343,71 @@ class ControllerTest {
         val response = postWebClient(webClient, rq, "calc_loan_params")
 
         assertTrue(response?.get("loan_terms")?.isArray ?: false)
+        println(response)
+    }
+
+    @Test
+    fun getApplicationLimit(@Autowired webClient: WebTestClient) {
+        val rq = ApplicationLimitRq("abcdef-ghijklmop-qrstuv-wxyz","111224566")
+        val response = postWebClient(webClient, rq, "get_application_limit")
+
+        assertNotNull(response?.get("limit"))
+        println(response)
+    }
+
+    @Test
+    fun getPassportIssuer(@Autowired webClient: WebTestClient) {
+        val rq = PassportIssuerRq("abcdef-ghijklmop-qrstuv-wxyz","111224566")
+        val response = postWebClient(webClient, rq, "get_passport_issuer")
+
+        assertEquals(response?.get("status")?.asText(), "SUCCESS")
+        println(response)
+    }
+
+    @Test
+    fun regFactSigningConditions(@Autowired webClient: WebTestClient) {
+        val rq = RegFactSigningConditionsRq("abcdef-ghijklmop-qrstuv-wxyz",
+            "123456", "+79111111111", "111224566")
+        val response = postWebClient(webClient, rq, "reg_fact_signing_conditions")
+
+        assertEquals(response?.get("status")?.asText(), "SUCCESS")
+        println(response)
+    }
+
+    @Test
+    fun payToCard(@Autowired webClient: WebTestClient) {
+        val rq = PayToCardRq("abcdef-ghijklmop-qrstuv-wxyz",
+            "ТКБ", "12345645665", "34000.00", "111224566")
+        val response = postWebClient(webClient, rq, "pay_to_card")
+
+//        assertEquals(response?.get("status")?.asText(), "SUCCESS")
+        println(response)
+    }
+
+    @Test
+    fun loanFinalization(@Autowired webClient: WebTestClient) {
+        val rq = LoanFinalizationRq("abcdef-ghijklmop-qrstuv-wxyz","111224566")
+        val response = postWebClient(webClient, rq, "loan_finalization")
+
+        assertEquals(response?.get("status")?.asText(), "SUCCESS")
+        println(response)
+    }
+
+    @Test
+    fun loanDocs(@Autowired webClient: WebTestClient) {
+        val rq = LoanDocsRq("abcdef-ghijklmop-qrstuv-wxyz","111224566")
+        val response = postWebClient(webClient, rq, "loan_docs")
+
+//        assertEquals(response?.get("status")?.asText(), "SUCCESS")
+        println(response)
+    }
+
+    @Test
+    fun getFile(@Autowired webClient: WebTestClient) {
+        val rq = FileRq("abcdef-ghijklmop-qrstuv-wxyz","/asuz_documents/m_app/2020/10/07/38348a2d49ea18ea01c7d6c787bd5901_1602071328.png")
+        val response = postWebClient(webClient, rq, "get_file")
+
+        assertNotNull(response?.get("file"))
         println(response)
     }
 }
