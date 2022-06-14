@@ -212,7 +212,7 @@ class TransferBpmsTest {
 
     fun getSessionBusiness(webClient: WebTestClient): Pair<String?, String?> {
         val sessionId = webClient.get().uri { u ->
-            u.path("/api/session").host("localhost").port(8076).build()
+            u.path("/api/session").host(properties.transferProxyHost).port(properties.transferProxyPort).build()
         }
             .exchange()
             .expectStatus()

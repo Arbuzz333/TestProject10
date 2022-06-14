@@ -16,5 +16,8 @@ data class AppTestProperties(
      */
     val gatewayName: String,
     val transferProxyHost: String,
-    val transferProxyPort: Int
+    val transferProxyPort: Int,
+
+    val identificationProxyHost: String,
+    val identificationProxyPort: Int
 )

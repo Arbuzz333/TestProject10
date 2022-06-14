@@ -414,7 +414,7 @@ class ControllerTest {
     @Test
     fun regEvent(@Autowired webClient: WebTestClient) {
         val rq = RegEventRq("abcdef-ghijklmop-qrstuv-wxyz",
-            "Попытка взлома кода СМС",
+            "ATTEMPT_TO_CRACK_SMS_CODE",
             "Иванов Иван Иванович, 14.11.1985, 5601 123456, +79999999999")
         val response = postWebClient(webClient, rq, "reg_event")
 
