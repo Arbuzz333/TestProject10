@@ -421,4 +421,49 @@ class ControllerTest {
         assertEquals(response?.get("status")?.asText(), "SUCCESS")
         println(response)
     }
+
+    @Test
+    fun checkAppData(@Autowired webClient: WebTestClient) {
+        val rq = CheckAppDataRq("abcdef-ghijklmop-qrstuv-wxyz",
+            "123456","Иванов","Иван","Иванович",
+            "10.10.1985","0000","000000"
+        )
+        val response = postWebClient(webClient, rq, "check_app_data")
+
+        assertEquals(response?.get("status")?.asText(), "SUCCESS")
+        println(response)
+    }
+
+    @Test
+    fun checkPassPhoto(@Autowired webClient: WebTestClient) {
+        val rq = CheckPassPhotoRq("abcdef-ghijklmop-qrstuv-wxyz",
+            "\\/asuz_documents\\/m_app\\/2020\\/10\\/07\\/38348a2d49ea18ea01c7d6c787bd5901_1602071328.png"
+        )
+        val response = postWebClient(webClient, rq, "check_pass_photo")
+
+        assertEquals(response?.get("status")?.asText(), "SUCCESS")
+        println(response)
+    }
+
+    @Test
+    fun checkPassSelfy(@Autowired webClient: WebTestClient) {
+        val rq = CheckPassSelfyRq("abcdef-ghijklmop-qrstuv-wxyz",
+            "123456","7891011"
+        )
+        val response = postWebClient(webClient, rq, "check_pass_selfy")
+
+        assertEquals(response?.get("status")?.asText(), "SUCCESS")
+        println(response)
+    }
+
+    @Test
+    fun checkSelfy(@Autowired webClient: WebTestClient) {
+        val rq = CheckSelfyRq("abcdef-ghijklmop-qrstuv-wxyz",
+            "\\/asuz_documents\\/m_app\\/2020\\/10\\/07\\/38348a2d49ea18ea01c7d6c787bd5901_1602071328.png"
+        )
+        val response = postWebClient(webClient, rq, "check_selfy")
+
+        assertEquals(response?.get("status")?.asText(), "SUCCESS")
+        println(response)
+    }
 }
