@@ -1,7 +1,9 @@
 package com.av.viva.avtotest.identificationProxi
 
 import com.av.viva.avtotest.config.AppTestProperties
+import com.av.viva.avtotest.identificationProxi.dto.RequestMediaDto
 import com.fasterxml.jackson.databind.JsonNode
+import com.fasterxml.jackson.databind.ObjectMapper
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -9,7 +11,9 @@ import org.springframework.core.io.ClassPathResource
 import org.springframework.http.MediaType
 import org.springframework.test.web.reactive.server.WebTestClient
 import org.springframework.util.StreamUtils
+import randomString
 import java.nio.charset.Charset
+import java.util.*
 
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -22,6 +26,35 @@ class IdentificationControllerTest {
     fun identificationProxySuccess(@Autowired webClient: WebTestClient) {
         val sessionId = getSessionBusiness(webClient)
         success(webClient,sessionId ?: "")
+    }
+
+    @Test
+    fun mediaTest(@Autowired webClient: WebTestClient) {
+        val resource = ClassPathResource("/request/identificationProxy/photo.json")
+        val request = ObjectMapper().readValue(resource.inputStream, RequestMediaDto::class.java)
+        request.fileName = "0_" + randomString(4) + "_0"
+
+        webClient.post().uri { u ->
+            u.path("api/photo").host(properties.identificationProxyHost).port(properties.identificationProxyPort).build()
+        }
+            .contentType(MediaType.APPLICATION_JSON)
+            .bodyValue(request)
+            .exchange()
+            .expectStatus()
+            .is2xxSuccessful
+
+        val resourceVideo = ClassPathResource("/request/identificationProxy/video.json")
+        val requestVideo = ObjectMapper().readValue(resourceVideo.inputStream, RequestMediaDto::class.java)
+        requestVideo.fileName = "0_" + randomString(4) + "_0"
+
+        webClient.post().uri { u ->
+            u.path("api/video").host(properties.identificationProxyHost).port(properties.identificationProxyPort).build()
+        }
+            .contentType(MediaType.APPLICATION_JSON)
+            .bodyValue(requestVideo)
+            .exchange()
+            .expectStatus()
+            .is2xxSuccessful
     }
 
     fun success(webClient: WebTestClient, sessionId: String) {
