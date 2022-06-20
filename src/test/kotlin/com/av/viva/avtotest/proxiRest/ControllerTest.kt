@@ -1,5 +1,7 @@
 package com.av.viva.avtotest.proxiRest
 
+import com.av.viva.avtotest.proxiRest.dto.*
+import com.av.viva.avtotest.proxiRest.dto.LoanFinalizationRq
 import com.av.viva.avtotest.proxiRest.model.*
 import com.fasterxml.jackson.databind.JsonNode
 import org.junit.jupiter.api.Assertions.*
@@ -464,6 +466,81 @@ class ControllerTest {
         val response = postWebClient(webClient, rq, "check_selfy")
 
         assertEquals(response?.get("status")?.asText(), "SUCCESS")
+        println(response)
+    }
+
+    @Test
+    fun getFileHash(@Autowired webClient: WebTestClient) {
+        val rq = FileHashRq("abcdef-ghijklmop-qrstuv-wxyz",
+            "20220522_437175ba4191210ee004e1d937494d09"
+        )
+        val response = postWebClient(webClient, rq, "get_file_hash")
+
+//        assertEquals(response?.get("status")?.asText(), "SUCCESS")
+        println(response)
+    }
+
+    @Test
+    fun uprid(@Autowired webClient: WebTestClient) {
+        val rq = UpridRq("abcdef-ghijklmop-qrstuv-wxyz",
+            "ИВАНОВ","ИВАН","ИВАНОВИЧ","10.10.1998","0000","000000",
+            "+79111111111","111-111-111 11","11111111111"
+        )
+        val response = postWebClient(webClient, rq, "uprid")
+
+        assertEquals(response?.get("status")?.asText(), "SUCCESS")
+        println(response)
+    }
+
+    @Test
+    fun uploadFile(@Autowired webClient: WebTestClient) {
+        val resource = ClassPathResource("/request/proxy/upload-file.json")
+        val json = StreamUtils.copyToString(resource.inputStream, Charset.forName("UTF-8"))
+        val response = postWebClient(webClient, json, "upload_file")
+
+        assertEquals(response?.get("status")?.asText(), "SUCCESS")
+        println(response)
+    }
+
+    @Test
+    fun transferSbp(@Autowired webClient: WebTestClient) {
+        val resource = TransferSbpRq("abcdef-ghijklmop-qrstuv-wxyz",
+            "10000","100000000061","+79111111111","")
+        val response = postWebClient(webClient, resource, "transfer_sbp")
+
+        assertNotNull(response?.get("transfer_id"))
+        println(response)
+    }
+
+    @Test
+    fun transferCard(@Autowired webClient: WebTestClient) {
+        val resource = TransferCardRq("abcdef-ghijklmop-qrstuv-wxyz",
+            "10000","100000000061565","ТКБ","")
+        val response = postWebClient(webClient, resource, "transfer_card")
+
+        assertNotNull(response?.get("transfer_id"))
+        println(response)
+    }
+
+    @Test
+    fun getTransferStatus(@Autowired webClient: WebTestClient) {
+        val resource = TransferStatusRq("abcdef-ghijklmop-qrstuv-wxyz",
+            "transfer_id_12345679")
+        val response = postWebClient(webClient, resource, "get_transfer_status")
+
+        assertNotNull(response?.get("transfer_status"))
+        println(response)
+    }
+
+    @Test
+    fun getApproForTransfer(@Autowired webClient: WebTestClient) {
+        val resource = ApproForTransferRq("abcdef-ghijklmop-qrstuv-wxyz",
+            "15000.00","Иванов","Иван","Иванович","10.10.1985","M",
+            "+79111111111","ivanov@mail.ru","111-111-111 11","123456789123","0000",
+            "000000","111-111")
+        val response = postWebClient(webClient, resource, "get_appro_for_transfer")
+
+        assertEquals(response?.get("result")?.asText(), "APPROVED")
         println(response)
     }
 }
