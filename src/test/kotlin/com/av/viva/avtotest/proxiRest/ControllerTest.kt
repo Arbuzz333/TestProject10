@@ -525,7 +525,7 @@ class ControllerTest {
     @Test
     fun getTransferStatus(@Autowired webClient: WebTestClient) {
         val resource = TransferStatusRq("abcdef-ghijklmop-qrstuv-wxyz",
-            "transfer_id_12345679")
+            "12345679")
         val response = postWebClient(webClient, resource, "get_transfer_status")
 
         assertNotNull(response?.get("transfer_status"))

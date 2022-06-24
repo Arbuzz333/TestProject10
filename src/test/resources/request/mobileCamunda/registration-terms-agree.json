@@ -1,0 +1,11 @@
+{
+  "messageName": "registration-terms-agree",
+  "businessKey": "registration-AAA",
+  "processVariables": {
+    "VN_USER_MESSAGE": {
+      "value": "{\"messageName\":\"registration-terms-agree\",\"businessKey\":\"registration-AAA\"}",
+      "type": "String"
+    }
+  },
+  "withVariablesInReturn": true
+}

@@ -1,0 +1,11 @@
+{
+  "messageName": "registration-account-id",
+  "businessKey": "registration-AAA",
+  "processVariables": {
+    "VN_USER_MESSAGE": {
+      "value": "{\"messageName\":\"registration-account-id\",\"businessKey\":\"registration-AAA\",\"user-id\":\"1110555\"}",
+      "type": "String"
+    }
+  },
+  "withVariablesInReturn": true
+}

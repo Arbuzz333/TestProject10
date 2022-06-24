@@ -1,0 +1,10 @@
+{
+  "messageName": "registration-passport-olds",
+  "businessKey": "registration-AAA",
+  "processVariables": {
+    "VN_USER_MESSAGE": {
+      "value": "{\n    \"messageName\": \"registration-passport-olds\",\n    \"businessKey\": \"registration-AAA\",\n    \"user-file\": \"/asuz_documents/m_app/2022/06/23/31b80ec9b4fafcb343305caee5945517_1655996961.jpg\"\n}",
+      "type": "String"
+    }
+  }
+}

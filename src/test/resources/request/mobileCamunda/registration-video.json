@@ -1,0 +1,10 @@
+{
+  "messageName": "registration-video",
+  "businessKey": "registration-AAA",
+  "processVariables": {
+    "VN_USER_MESSAGE": {
+      "value": "{\n    \"messageName\": \"registration-video\",\n    \"businessKey\": \"registration-AAA\",\n    \"user-file\": \"/asuz_documents/m_app/2022/06/23/2322a8d725b6c5d447f5f5e7bf32ace5_1655996976.mp4\"\n}",
+      "type": "String"
+    }
+  }
+}
