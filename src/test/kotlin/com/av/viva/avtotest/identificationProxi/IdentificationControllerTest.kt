@@ -1,9 +1,11 @@
 package com.av.viva.avtotest.identificationProxi
 
 import com.av.viva.avtotest.config.AppTestProperties
+import com.av.viva.avtotest.identificationProxi.dto.ClientDataRq
 import com.av.viva.avtotest.identificationProxi.dto.RequestMediaDto
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.ObjectMapper
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -11,9 +13,9 @@ import org.springframework.core.io.ClassPathResource
 import org.springframework.http.MediaType
 import org.springframework.test.web.reactive.server.WebTestClient
 import org.springframework.util.StreamUtils
+import randomDigits
 import randomString
 import java.nio.charset.Charset
-import java.util.*
 
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -23,6 +25,44 @@ class IdentificationControllerTest {
     lateinit var properties: AppTestProperties
 
     @Test
+    fun getIdentificationUrl(@Autowired webClient: WebTestClient) {
+        val reqId = randomDigits(7).toString()
+        val request = ClientDataRq(
+            reqId,
+            "test/redirect/url",
+            randomString(7),
+            randomString(7),
+            randomString(7),
+            "1980-03-15",
+            "M",
+            "+7" + randomDigits(7),
+            randomString(7) + '@' + randomString(3) + ".com",
+            randomString(7),
+            randomDigits(12).toString(),
+            randomString(3),
+            randomDigits(4).toString()
+        )
+
+        val response = webClient.post().uri { u ->
+            u.path("api/identification/url")
+                .host(properties.identificationProxyHost)
+                .port(properties.identificationProxyPort)
+                .build()
+        }
+            .contentType(MediaType.APPLICATION_JSON)
+            .bodyValue(request)
+            .exchange()
+            .expectStatus()
+            .is2xxSuccessful
+            .expectBody(String::class.java)
+            .returnResult()
+            .responseBody
+
+        println(response)
+        assertTrue(response?.endsWith(reqId) ?: false)
+    }
+
+    @Test
     fun identificationProxySuccess(@Autowired webClient: WebTestClient) {
         val sessionId = getSessionBusiness(webClient)
         success(webClient,sessionId ?: "")
@@ -30,6 +70,8 @@ class IdentificationControllerTest {
 
     @Test
     fun mediaTest(@Autowired webClient: WebTestClient) {
+        val sessionId = getSessionId(webClient)
+
         val resource = ClassPathResource("/request/identificationProxy/photo.json")
         val request = ObjectMapper().readValue(resource.inputStream, RequestMediaDto::class.java)
         request.fileName = "0_" + randomString(4) + "_0"
@@ -38,6 +80,7 @@ class IdentificationControllerTest {
             u.path("api/photo").host(properties.identificationProxyHost).port(properties.identificationProxyPort).build()
         }
             .contentType(MediaType.APPLICATION_JSON)
+            .cookie("viva_session_id", sessionId ?: "")
             .bodyValue(request)
             .exchange()
             .expectStatus()
@@ -51,6 +94,7 @@ class IdentificationControllerTest {
             u.path("api/video").host(properties.identificationProxyHost).port(properties.identificationProxyPort).build()
         }
             .contentType(MediaType.APPLICATION_JSON)
+            .cookie("viva_session_id", sessionId ?: "")
             .bodyValue(requestVideo)
             .exchange()
             .expectStatus()
@@ -87,7 +131,7 @@ class IdentificationControllerTest {
         postProxyWebClient(webClient, json, sessionId)
     }
 
-    fun getSessionBusiness(webClient: WebTestClient): String? {
+    fun getSessionId(webClient: WebTestClient): String? {
         val sessionId = webClient.get().uri { u ->
             u.path("/api/session").host(properties.identificationProxyHost).port(properties.identificationProxyPort).build()
         }
@@ -99,6 +143,11 @@ class IdentificationControllerTest {
             .responseBody
 
         println("SessionId: $sessionId")
+        return sessionId
+    }
+
+    fun getSessionBusiness(webClient: WebTestClient): String? {
+        val sessionId = getSessionId(webClient)
 
         val businessKey = webClient.post().uri { u ->
             u.path("/api/process/start").host(properties.identificationProxyHost).port(properties.identificationProxyPort).build()

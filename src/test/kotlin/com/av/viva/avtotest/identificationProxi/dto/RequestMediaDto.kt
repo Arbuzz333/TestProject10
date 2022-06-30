@@ -9,5 +9,7 @@ data class RequestMediaDto(
     @JsonProperty(value = "file_name", access = JsonProperty.Access.READ_WRITE)
     var fileName: String,
     @JsonProperty(value = "file_path", access = JsonProperty.Access.READ_WRITE)
-    val filePath: String
+    val filePath: String,
+    @JsonProperty(value = "message_name", access = JsonProperty.Access.READ_WRITE)
+    val messageName: String
 )
