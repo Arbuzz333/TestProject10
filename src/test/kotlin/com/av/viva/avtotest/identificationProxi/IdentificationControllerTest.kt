@@ -1,8 +1,7 @@
 package com.av.viva.avtotest.identificationProxi
 
 import com.av.viva.avtotest.config.AppTestProperties
-import com.av.viva.avtotest.identificationProxi.dto.ClientDataRq
-import com.av.viva.avtotest.identificationProxi.dto.RequestMediaDto
+import com.av.viva.avtotest.identificationProxi.dto.*
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.junit.jupiter.api.Assertions.assertTrue
@@ -25,8 +24,13 @@ class IdentificationControllerTest {
     lateinit var properties: AppTestProperties
 
     @Test
-    fun getIdentificationUrl(@Autowired webClient: WebTestClient) {
+    fun startProcessData(@Autowired webClient: WebTestClient) {
         val reqId = randomDigits(7).toString()
+        getIdentificationUrl(webClient, reqId)
+        getSessionBusiness(webClient, reqId)
+    }
+
+    fun getIdentificationUrl(webClient: WebTestClient, reqId: String) {
         val request = ClientDataRq(
             reqId,
             "test/redirect/url",
@@ -54,17 +58,18 @@ class IdentificationControllerTest {
             .exchange()
             .expectStatus()
             .is2xxSuccessful
-            .expectBody(String::class.java)
+            .expectBody(IdentificationUrlRs::class.java)
             .returnResult()
             .responseBody
 
         println(response)
-        assertTrue(response?.endsWith(reqId) ?: false)
+        assertTrue(response?.identificationUrl?.endsWith(reqId) ?: false)
     }
 
     @Test
     fun identificationProxySuccess(@Autowired webClient: WebTestClient) {
-        val sessionId = getSessionBusiness(webClient)
+        val reqId = randomDigits(7).toString()
+        val sessionId = getSessionBusiness(webClient, reqId)
         success(webClient,sessionId ?: "")
     }
 
@@ -146,13 +151,15 @@ class IdentificationControllerTest {
         return sessionId
     }
 
-    fun getSessionBusiness(webClient: WebTestClient): String? {
+    fun getSessionBusiness(webClient: WebTestClient, reqId: String): String? {
         val sessionId = getSessionId(webClient)
+        val rq = ReqIdRq(reqId)
 
         val businessKey = webClient.post().uri { u ->
             u.path("/api/process/start").host(properties.identificationProxyHost).port(properties.identificationProxyPort).build()
         }
             .cookie("viva_session_id", sessionId ?: "")
+            .bodyValue(rq)
             .exchange()
             .expectStatus()
             .is2xxSuccessful

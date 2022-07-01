@@ -21,3 +21,7 @@ fun randomDigits(length: Int): Long {
         .toLong()
     return randomString
 }
+
+fun randomDigitsStr(length: Int): String {
+    return randomDigits(length).toString()
+}
