@@ -1,0 +1,10 @@
+spring:
+  jackson:
+    serialization:
+      INDENT_OUTPUT: true
+  datasource:
+    url: jdbc:postgresql://localhost:5432/identification_proxy
+    username: identification_proxy_admin
+    password: identification_proxy_admin
+    hikari:
+      data-source-properties: stringtype=unspecified

@@ -1,14 +1,21 @@
 package com.av.viva.avtotest.identificationProxi
 
 import com.av.viva.avtotest.config.AppTestProperties
+import com.av.viva.avtotest.entity.BKeySession
 import com.av.viva.avtotest.identificationProxi.dto.*
 import com.fasterxml.jackson.databind.JsonNode
 import com.fasterxml.jackson.databind.ObjectMapper
+import io.r2dbc.spi.ConnectionFactories
+import io.r2dbc.spi.ConnectionFactory
+import io.r2dbc.spi.ConnectionFactoryOptions
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.core.io.ClassPathResource
+import org.springframework.data.r2dbc.core.R2dbcEntityTemplate
+import org.springframework.data.r2dbc.query.Criteria.where
+import org.springframework.data.relational.core.query.Query.query
 import org.springframework.http.MediaType
 import org.springframework.test.web.reactive.server.WebTestClient
 import org.springframework.util.StreamUtils
@@ -155,6 +162,22 @@ class IdentificationControllerTest {
         val sessionId = getSessionId(webClient)
         val rq = ReqIdRq(reqId)
 
+        val template = getTemplate()
+        val bK = template.select(query(where("sessionId").`is`(sessionId ?: "")), BKeySession::class.java).blockFirst()
+        val identification = Identification(
+            businessKey = bK?.businessKey ?: "",
+            status = "ok",
+            result = "ok"
+        )
+
+        webClient.post().uri { u ->
+            u.path("api/identification/save").host(properties.identificationProxyHost).port(properties.identificationProxyPort).build()
+        }
+            .bodyValue(identification)
+            .exchange()
+            .expectStatus()
+            .is2xxSuccessful
+
         val businessKey = webClient.post().uri { u ->
             u.path("/api/process/start").host(properties.identificationProxyHost).port(properties.identificationProxyPort).build()
         }
@@ -187,5 +210,20 @@ class IdentificationControllerTest {
 
         println("RESPONSE $response")
         return response
+    }
+
+    fun getTemplate(): R2dbcEntityTemplate {
+        val builder: ConnectionFactoryOptions.Builder = ConnectionFactoryOptions.builder()
+        builder.option(ConnectionFactoryOptions.HOST, "localhost")
+        builder.option(ConnectionFactoryOptions.PORT, 5432)
+        builder.option(ConnectionFactoryOptions.USER, "identification_proxy_admin")
+        builder.option(ConnectionFactoryOptions.PASSWORD, "identification_proxy_admin")
+        builder.option(ConnectionFactoryOptions.DATABASE, "identification_proxy")
+        builder.option(ConnectionFactoryOptions.HOST, "localhost")
+        builder.option(ConnectionFactoryOptions.DRIVER, "postgresql")
+
+        val connectionFactory: ConnectionFactory = ConnectionFactories.get(builder.build())
+        val template = R2dbcEntityTemplate(connectionFactory)
+        return template
     }
 }
