@@ -3,7 +3,7 @@
   "businessKey": "registration-AAA",
   "processVariables": {
     "VN_USER_MESSAGE": {
-      "value": "{\n    \"messageName\": \"phone-approval-code\",\n    \"businessKey\": \"registration-AAA\",\n    \"user-code\": \"000000\"\n}",
+      "value": "{\n    \"messageName\": \"phone-approval-code\",\n    \"businessKey\": \"registration-AAA\",\n    \"user-code\": \"111111\"\n}",
       "type": "String"
     }
   }

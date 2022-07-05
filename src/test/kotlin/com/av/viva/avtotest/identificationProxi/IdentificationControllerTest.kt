@@ -162,22 +162,6 @@ class IdentificationControllerTest {
         val sessionId = getSessionId(webClient)
         val rq = ReqIdRq(reqId)
 
-        val template = getTemplate()
-        val bK = template.select(query(where("sessionId").`is`(sessionId ?: "")), BKeySession::class.java).blockFirst()
-        val identification = Identification(
-            businessKey = bK?.businessKey ?: "",
-            status = "ok",
-            result = "ok"
-        )
-
-        webClient.post().uri { u ->
-            u.path("api/identification/save").host(properties.identificationProxyHost).port(properties.identificationProxyPort).build()
-        }
-            .bodyValue(identification)
-            .exchange()
-            .expectStatus()
-            .is2xxSuccessful
-
         val businessKey = webClient.post().uri { u ->
             u.path("/api/process/start").host(properties.identificationProxyHost).port(properties.identificationProxyPort).build()
         }
@@ -192,6 +176,24 @@ class IdentificationControllerTest {
 
         println("BusinessKey: $businessKey")
         return sessionId
+    }
+
+    fun identificationSave(webClient: WebTestClient, sessionId: String) {
+        val template = getTemplate()
+        val bK = template.select(query(where("sessionId").`is`(sessionId)), BKeySession::class.java).blockFirst()
+        val identification = Identification(
+            businessKey = bK?.businessKey ?: "",
+            status = "ok",
+            result = "ok"
+        )
+
+        webClient.post().uri { u ->
+            u.path("api/identification/save").host(properties.identificationProxyHost).port(properties.identificationProxyPort).build()
+        }
+            .bodyValue(identification)
+            .exchange()
+            .expectStatus()
+            .is2xxSuccessful
     }
 
     fun postProxyWebClient(webClient: WebTestClient, json: String, sessionId: String): JsonNode? {
