@@ -1,6 +1,6 @@
 package com.av.viva.avtotest.mobileCamunda.rest
 
-import com.av.viva.avtotest.mobileCamunda.rest.dto.LoanAppStartRequest
+import com.av.viva.avtotest.mobileCamunda.rest.dto.RegistrationStartRequest
 import com.fasterxml.jackson.databind.JsonNode
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -9,7 +9,6 @@ import org.springframework.core.io.ClassPathResource
 import org.springframework.http.MediaType
 import org.springframework.test.web.reactive.server.WebTestClient
 import org.springframework.util.StreamUtils
-import randomDigits
 import java.nio.charset.Charset
 import java.util.*
 
@@ -40,27 +39,24 @@ class MobileCamundaTest {
 
     @Test
     fun startProcessTest(@Autowired webClient: WebTestClient) {
-        val rq = LoanAppStartRequest(
-            type = "loanapp-start",
+        val rq = RegistrationStartRequest(
+            type = "registration-start",
             businessKey = "registration-AAA".replace(baseBQ, UUID.randomUUID().toString()),
-            startParams = LoanAppStartRequest.LoanAppStartParams(
-                userId = randomDigits(5).toString()
-            ),
-            params = "{\"user-id\": \"b659ed0e-77df-4083-9338-ca5222bc7e6d\",\"client-platform\": \"android\",\"client-version\": \"1701000\"}"
+            userParams = "{\"messageName\": \"registration-start\",\"client-platform\": \"android\",\"client-version\": \"1701\"}"
         )
         startProcess(webClient, rq)
 
-        postPostMessage(webClient, rq.businessKey, "registration-terms-agree")
-        postPostMessage(webClient, rq.businessKey, "phone-approval-started")
-        postPostMessage(webClient, rq.businessKey, "phone-approval-code")
-        postPostMessage(webClient, rq.businessKey, "registration-account-id")
-        postPostMessage(webClient, rq.businessKey, "registration-passport-main")
-        postPostMessage(webClient, rq.businessKey, "registration-passport-olds")
-        postPostMessage(webClient, rq.businessKey, "registration-passport-address")
-        postPostMessage(webClient, rq.businessKey, "registration-video")
+        postMessage(webClient, rq.businessKey, "registration-terms-agree")
+        postMessage(webClient, rq.businessKey, "phone-approval-started")
+        postMessage(webClient, rq.businessKey, "phone-approval-code")
+        postMessage(webClient, rq.businessKey, "registration-account-id")
+//        postMessage(webClient, rq.businessKey, "registration-passport-main")
+//        postMessage(webClient, rq.businessKey, "registration-passport-olds")
+        postMessage(webClient, rq.businessKey, "registration-video")
+//        postMessage(webClient, rq.businessKey, "registration-passport-address")
     }
 
-    fun postPostMessage(webClient: WebTestClient, businessKey: String, method: String) {
+    fun postMessage(webClient: WebTestClient, businessKey: String, method: String) {
         val resource = ClassPathResource("/request/mobileCamunda/$method.json")
         var json = StreamUtils.copyToString(resource.inputStream, Charset.forName("UTF-8"))
         json = json.replace("registration-AAA", businessKey, false)
