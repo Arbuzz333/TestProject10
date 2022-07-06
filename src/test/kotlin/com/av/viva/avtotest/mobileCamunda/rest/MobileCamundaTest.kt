@@ -2,6 +2,8 @@ package com.av.viva.avtotest.mobileCamunda.rest
 
 import com.av.viva.avtotest.mobileCamunda.rest.dto.RegistrationStartRequest
 import com.fasterxml.jackson.databind.JsonNode
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.runBlocking
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -38,7 +40,7 @@ class MobileCamundaTest {
     }
 
     @Test
-    fun startProcessTest(@Autowired webClient: WebTestClient) {
+    fun startProcessTest(@Autowired webClient: WebTestClient) = runBlocking {
         val rq = RegistrationStartRequest(
             type = "registration-start",
             businessKey = "registration-AAA".replace(baseBQ, UUID.randomUUID().toString()),
@@ -46,14 +48,15 @@ class MobileCamundaTest {
         )
         startProcess(webClient, rq)
 
+        delay(500)
         postMessage(webClient, rq.businessKey, "registration-terms-agree")
         postMessage(webClient, rq.businessKey, "phone-approval-started")
         postMessage(webClient, rq.businessKey, "phone-approval-code")
         postMessage(webClient, rq.businessKey, "registration-account-id")
-//        postMessage(webClient, rq.businessKey, "registration-passport-main")
-//        postMessage(webClient, rq.businessKey, "registration-passport-olds")
+        postMessage(webClient, rq.businessKey, "registration-passport-main")
+        postMessage(webClient, rq.businessKey, "registration-passport-olds")
+        postMessage(webClient, rq.businessKey, "registration-passport-address")
         postMessage(webClient, rq.businessKey, "registration-video")
-//        postMessage(webClient, rq.businessKey, "registration-passport-address")
     }
 
     fun postMessage(webClient: WebTestClient, businessKey: String, method: String) {

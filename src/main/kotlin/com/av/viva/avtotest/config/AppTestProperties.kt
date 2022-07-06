@@ -19,5 +19,7 @@ data class AppTestProperties(
     val transferProxyPort: Int,
 
     val identificationProxyHost: String,
-    val identificationProxyPort: Int
+    val identificationProxyPort: Int,
+
+    val misProcessKey: String
 )
