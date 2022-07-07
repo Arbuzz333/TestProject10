@@ -1,0 +1,10 @@
+{
+  "messageName": "loanapp-employment-info",
+  "businessKey": "loanapp-AAA",
+  "processVariables": {
+    "VN_USER_MESSAGE": {
+      "value": "{\"employment-info\": {\"income-type\": \"EMPLOYED\",\"organization-type\": \"COMMERCIAL_ORGANIZATION\",\"company-occupations\": \"IT_AND_TELECOM\",\"last-work-term\": \"6M_TO_2Y\",\"position\": \"MIDDLE_MANAGEMENT_1\",\"salary\": 100000}}",
+      "type": "String"
+    }
+  }
+}

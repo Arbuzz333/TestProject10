@@ -8,8 +8,7 @@ data class LoanAppStartRequest(
     @JsonProperty(value = "business-key", access = JsonProperty.Access.READ_WRITE)
     val businessKey: String,
     val processName: String = "loan-application",
-    val params: String,
-    val startParams: LoanAppStartParams
+    val params: String
 ) {
 
     data class LoanAppStartParams(

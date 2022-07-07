@@ -1,6 +1,11 @@
 package com.av.viva.avtotest.rest.mis
 
 import com.av.viva.avtotest.config.AppTestProperties
+import com.av.viva.avtotest.rest.dto.MisStartRq
+import com.av.viva.avtotest.rest.dto.RequestData
+import com.fasterxml.jackson.databind.ObjectMapper
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
@@ -15,30 +20,43 @@ class MisController(
     val properties: AppTestProperties
 ) {
 
+    companion object {
+        val logger: Logger = LoggerFactory.getLogger(MisController::class.java)
+        const val successResponse = "{\"hmac\":\"6a3843bc2e671549a4febf70c75d0fde\",\"response\":{\"status\":\"SUCCESS\",\"message\":\"\"}}"
+    }
+
     @PostMapping("/get_process_key")
     fun getMonetaCardData(
-        jsonNode: String?
+        rq: MisStartRq?
     ): String {
-        println("get_process_key $jsonNode")
+        logger.info("get_process_key $rq")
+        val om = ObjectMapper()
+        val requestData = om.readValue(rq?.request?.process, RequestData::class.java)
+
+        val processKey = when (requestData.process) {
+            "registration" -> properties.misProcessKey
+            "loan-application" -> "Process_LoanApp_v1.3"
+            else -> "Bad request"
+        }
 
         return "{\"hmac\":\"4140d51dc3f97327e93e3024a113563f\"," +
-                "\"response\":{\"status\":\"SUCCESS\",\"message\":\"\",\"process-key\":\"${properties.misProcessKey}\"}}"
+                "\"response\":{\"status\":\"SUCCESS\",\"message\":\"\",\"process-key\":\"$processKey\"}}"
     }
 
     @PostMapping("/activate_demo_account")
     fun activateDemoAccount(
-        jsonNode: String?
+        rq: MisStartRq?
     ): String {
-        println("activate_demo_account $jsonNode")
+        logger.info("activate_demo_account $rq")
 
-        return "{\"hmac\":\"6a3843bc2e671549a4febf70c75d0fde\",\"response\":{\"status\":\"SUCCESS\",\"message\":\"\"}}"
+        return successResponse
     }
 
     @PostMapping("/get_registration_type")
     fun getRegistrationType(
-        jsonNode: String?
+        rq: MisStartRq?
     ): String {
-        println("activate_demo_account $jsonNode")
+        logger.info("activate_demo_account $rq")
 
         return "{\"hmac\":\"4e95fec62fdd128e4b12bb61f8f25231\"," +
                 "\"response\":{\"status\":\"SUCCESS\",\"message\":\"\",\"result\":\"FULL\"}}"
@@ -46,9 +64,9 @@ class MisController(
 
     @PostMapping("/send_sms")
     fun sendSms(
-        jsonNode: String?
+        rq: MisStartRq?
     ): String {
-        println("send_sms $jsonNode")
+        logger.info("send_sms $rq")
 
         return "{\"hmac\":\"2ddd00b5a8ef9da93243b1a7ed35c1cf\"," +
                 "\"response\":{\"message\":\"\",\"status\":\"SUCCESS\",\"0\":\"10387\"}}"
@@ -56,19 +74,95 @@ class MisController(
 
     @PostMapping("/register_lead")
     fun registerLead(
-        jsonNode: String?
+        rq: MisStartRq?
     ): String {
-        println("register_lead $jsonNode")
+        logger.info("register_lead $rq")
 
-        return "{\"hmac\":\"6a3843bc2e671549a4febf70c75d0fde\",\"response\":{\"status\":\"SUCCESS\",\"message\":\"\"}}"
+        return successResponse
     }
 
     @PostMapping("/input_passport_main")
     fun inputPassportMain(
-        jsonNode: String?
+        rq: MisStartRq?
     ): String {
-        println("register_lead $jsonNode")
+        logger.info("input_passport_main $rq")
 
-        return "{\"hmac\":\"6a3843bc2e671549a4febf70c75d0fde\",\"response\":{\"status\":\"SUCCESS\",\"message\":\"\"}}"
+        return successResponse
     }
+
+    @PostMapping("/input_passport_old")
+    fun inputPassportOld(
+        rq: MisStartRq?
+    ): String {
+        logger.info("input_passport_old $rq")
+
+        return successResponse
+    }
+
+    @PostMapping("/input_phone")
+    fun inputPhone(
+        rq: MisStartRq?
+    ): String {
+        logger.info("input_phone $rq")
+
+        return successResponse
+    }
+
+    @PostMapping("/input_passport_address")
+    fun inputPassportAddress(
+        rq: MisStartRq?
+    ): String {
+        logger.info("input_passport_address $rq")
+
+        return successResponse
+    }
+
+    @PostMapping("/input_video_selfie")
+    fun inputVideoSelfie(
+        rq: MisStartRq?
+    ): String {
+        logger.info("input_video_selfie $rq")
+
+        return successResponse
+    }
+
+    @PostMapping("/activate_account")
+    fun activateAccount(
+        rq: MisStartRq?
+    ): String {
+        logger.info("activate_account $rq")
+
+        return successResponse
+    }
+
+    @PostMapping("/profile")
+    fun profile(
+        rq: MisStartRq?
+    ): String {
+        logger.info("profile $rq")
+
+        return "{\"hmac\":\"62a8bffc2c00a1177ba9f5301fa7e245\",\"response\":{\"status\":\"SUCCESS\",\"message\":\"\"," +
+                "\"client\":{\"person\":{\"lastname\":\"КУДРЯВЦЕВ\",\"name\":\"ЛЕОНИД\",\"surname\":\"ВАЛЕРЬЯНОВИЧ\"," +
+                "\"birthdate\":\"1991-01-01\",\"passport\":\"4710 352764\",\"address\":\"г Москва, г Троицк, ул.Северная, д.123 кв.\"," +
+                "\"phone\":\"+79782482088\",\"email\":\"\"}}}}"
+    }
+
+    @PostMapping("/reg_fact_sms_bki")
+    fun regFactSmsBki(
+        rq: MisStartRq?
+    ): String {
+        logger.info("reg_fact_sms_bki $rq")
+
+        return successResponse
+    }
+
+    @PostMapping("/loanapp_review")
+    fun loanappReview(
+        rq: MisStartRq?
+    ): String {
+        logger.info("loanapp_review $rq")
+
+        return successResponse
+    }
+
 }

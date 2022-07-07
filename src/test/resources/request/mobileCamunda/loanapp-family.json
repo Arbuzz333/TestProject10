@@ -1,0 +1,10 @@
+{
+  "messageName": "loanapp-family",
+  "businessKey": "loanapp-AAA",
+  "processVariables": {
+    "VN_USER_MESSAGE": {
+      "value": "{\"family-status\": \"MARRIED\",\"family-status-text\": \"Женат/замужем\"}",
+      "type": "String"
+    }
+  }
+}

@@ -43,9 +43,6 @@ class MobileDemoCamundaTest {
         val rq = LoanAppStartRequest(
             type = "loanapp-start",
             businessKey = "registration-AAA".replace(baseBQ, UUID.randomUUID().toString()),
-            startParams = LoanAppStartRequest.LoanAppStartParams(
-                userId = randomDigits(5).toString()
-            ),
             params = "{\"user-id\": \"b659ed0e-77df-4083-9338-ca5222bc7e6d\",\"client-platform\": \"android\",\"client-version\": \"1701000\"}"
         )
         startProcess(webClient, rq)

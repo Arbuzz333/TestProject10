@@ -1,6 +1,6 @@
 {
   "messageName": "loanapp-parameters",
-  "businessKey": "loanapp-7bfbf1f5e940ee12d3ff04347b0bfae5856ef99251ae90a49f8d8d34419a7d99",
+  "businessKey": "loanapp-AAA",
   "processVariables": {
     "VN_USER_MESSAGE": {
       "value": "{\"messageName\": \"loanapp-parameters\",\"businessKey\": \"loanapp-AAA\",\"loan-parameters\": {\"sum\": 1000,\"period\": \"6M\"}}",
