@@ -1,6 +1,7 @@
 package com.av.viva.avtotest.mobileCamunda.rest
 
 import com.av.viva.avtotest.mobileCamunda.rest.dto.LoanAppStartRequest
+import com.av.viva.avtotest.mobileCamunda.rest.dto.LoanTxStartRequest
 import com.av.viva.avtotest.mobileCamunda.rest.dto.RegistrationStartRequest
 import com.fasterxml.jackson.databind.JsonNode
 import kotlinx.coroutines.delay
@@ -82,12 +83,25 @@ class MobileCamundaTest {
         postMessageLoanApp(webClient, rqLoanappStart.businessKey, "phone-approval-started-2")
         postMessageLoanApp(webClient, rqLoanappStart.businessKey, "phone-approval-code-2")
         postMessageLoanApp(webClient, rqLoanappStart.businessKey, "loanapp-viva-loan-approved")
+        delay(500)
+        val rqLoantx = LoanTxStartRequest(
+            type = "loantx-start",
+            businessKey = "loantx-AAA".replace(baseBQ, UUID.randomUUID().toString()),
+            userParams = "{\"messageName\": \"loantx-start\",\"user-id\": \"879b5423-643d-4002-bb3c-af6ddb630295\"," +
+                    "\"offer-id\": \"29232\",\"client-platform\": \"android\",\"client-version\": \"1701\"}",
+            )
+        startProcess(webClient, rqLoantx)
+        postMessageLoanTx(webClient, rqLoantx.businessKey, "loantx-loan-parameters")
+        delay(500)
+        postMessageLoanTx(webClient, rqLoantx.businessKey, "loantx-terms-approved")
+        postMessageLoanTx(webClient, rqLoantx.businessKey, "phone-approval-started-tx")
+        postMessageLoanTx(webClient, rqLoantx.businessKey, "phone-approval-code-tx")
     }
 
     fun postMessage(webClient: WebTestClient, businessKey: String, method: String) {
         var json = getJsonResource(method)
         json = json.replace("registration-AAA", businessKey, false)
-        println("JSON registration start $json")
+        println("JSON registration $json")
 
         postWebClient(webClient, json)
     }
@@ -95,7 +109,15 @@ class MobileCamundaTest {
     fun postMessageLoanApp(webClient: WebTestClient, businessKey: String, method: String) {
         var json = getJsonResource(method)
         json = json.replace("loanapp-AAA", businessKey, false)
-        println("JSON loan app start $json")
+        println("JSON loan app $json")
+
+        postWebClient(webClient, json)
+    }
+
+    fun postMessageLoanTx(webClient: WebTestClient, businessKey: String, method: String) {
+        var json = getJsonResource(method)
+        json = json.replace("loantx-AAA", businessKey, false)
+        println("JSON loan tx $json")
 
         postWebClient(webClient, json)
     }

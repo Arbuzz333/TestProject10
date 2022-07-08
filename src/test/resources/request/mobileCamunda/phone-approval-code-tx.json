@@ -1,0 +1,10 @@
+{
+  "messageName": "phone-approval-code",
+  "businessKey": "loantx-AAA",
+  "processVariables": {
+    "VN_USER_MESSAGE": {
+      "value": "{\"user-code\": \"111111\"\n}",
+      "type": "String"
+    }
+  }
+}

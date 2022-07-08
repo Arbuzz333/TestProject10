@@ -1,0 +1,10 @@
+{
+  "messageName": "loantx-loan-parameters",
+  "businessKey": "loantx-AAA",
+  "processVariables": {
+    "VN_USER_MESSAGE": {
+      "value": "{\"loan-parameters\": {\"sum\": \"11000\",\"period\": \"6M\",\"periodText\": \"6 месяцев\",\"percent\": 0.7,\"monthlyPayment\": 4175.0,\"paymentsCount\": 6,\"insurance\": true,\"insurance_sum\": \"1000\"}}",
+      "type": "String"
+    }
+  }
+}

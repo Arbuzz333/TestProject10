@@ -36,6 +36,7 @@ class MisController(
         val processKey = when (requestData.process) {
             "registration" -> properties.misProcessKey
             "loan-application" -> "Process_LoanApp_v1.3"
+            "loan-transaction" -> "Process_LoanTx_v1.6"
             else -> "Bad request"
         }
 
@@ -163,6 +164,28 @@ class MisController(
         logger.info("loanapp_review $rq")
 
         return successResponse
+    }
+
+    @PostMapping("/check_offer")
+    fun checkOffer(
+        rq: MisStartRq?
+    ): String {
+        logger.info("check_offer $rq")
+
+        return "{\"hmac\":\"c4e08b6ad176d98d9d793a96c2815ab8\",\"response\":{\"status\":\"SUCCESS\",\"message\":\"\"," +
+                "\"offer-status\":\"ACTUAL\",\"offer-amount\":\"10000\",\"offer-period\":\"6M\",\"offer-rate\":\"0.71\"," +
+                "\"offer-date\":\"2022-07-05\"}}"
+    }
+
+    @PostMapping("/loan_docs")
+    fun loanDocs(
+        rq: MisStartRq?
+    ): String {
+        logger.info("loan_docs $rq")
+
+        return "{\"hmac\":\"3f65a62bba1e8ec8adbbe6a4d999a688\",\"response\":{\"status\":\"SUCCESS\",\"message\":\"\"," +
+                "\"individual-conditions\":\"/asuz_documents/m_app/2022/7/5/31993_194_1.pdf\",\"payment-schedule\":" +
+                "\"/asuz_documents/m_app/2022/7/5/31993_195_1.pdf\",\"insurance-terms\":\"/asuz_documents/m_app/2022/7/5/31993_202_1.pdf\"}}"
     }
 
 }
