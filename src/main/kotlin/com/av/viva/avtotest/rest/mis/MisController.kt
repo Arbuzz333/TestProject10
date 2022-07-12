@@ -57,7 +57,7 @@ class MisController(
     fun getRegistrationType(
         rq: MisStartRq?
     ): String {
-        logger.info("activate_demo_account $rq")
+        logger.info("get_registration_type $rq")
 
         return "{\"hmac\":\"4e95fec62fdd128e4b12bb61f8f25231\"," +
                 "\"response\":{\"status\":\"SUCCESS\",\"message\":\"\",\"result\":\"FULL\"}}"
@@ -186,6 +186,43 @@ class MisController(
         return "{\"hmac\":\"3f65a62bba1e8ec8adbbe6a4d999a688\",\"response\":{\"status\":\"SUCCESS\",\"message\":\"\"," +
                 "\"individual-conditions\":\"/asuz_documents/m_app/2022/7/5/31993_194_1.pdf\",\"payment-schedule\":" +
                 "\"/asuz_documents/m_app/2022/7/5/31993_195_1.pdf\",\"insurance-terms\":\"/asuz_documents/m_app/2022/7/5/31993_202_1.pdf\"}}"
+    }
+
+    @PostMapping("/reg_fact_confirm_conditions")
+    fun regFactConfirmConditions (
+        rq: MisStartRq?
+    ): String {
+        logger.info("reg_fact_confirm_conditions $rq")
+
+        return successResponse
+    }
+
+    @PostMapping("/pay_to_card")
+    fun payToCard (
+        rq: MisStartRq?
+    ): String {
+        logger.info("pay_to_card $rq")
+
+        return "{\"hmac\":\"1f70b1792135aa892f89d47d31a66cd5\",\"response\":{\"status\":\"SUCCESS\",\"message\":\"\"," +
+                "\"tx-id\":\"2845855\",\"tx-status\":\"SUCCEED\"}}"
+    }
+
+    @PostMapping("/check_assessment")
+    fun checkAssessment (
+        rq: MisStartRq?
+    ): String {
+        logger.info("check_assessment $rq")
+
+        return "{\"hmac\":\"b17c97d2c9a6602b6ddde166ece117f2\",\"response\":{\"status\":\"SUCCESS\",\"message\":\"\",\"result\":\"assessment_required\"}}"
+    }
+
+    @PostMapping("/add_assessment")
+    fun addAssessment (
+        rq: MisStartRq?
+    ): String {
+        logger.info("add_assessment $rq")
+
+        return successResponse
     }
 
 }

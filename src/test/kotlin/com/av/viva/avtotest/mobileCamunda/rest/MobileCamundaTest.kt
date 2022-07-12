@@ -96,6 +96,10 @@ class MobileCamundaTest {
         postMessageLoanTx(webClient, rqLoantx.businessKey, "loantx-terms-approved")
         postMessageLoanTx(webClient, rqLoantx.businessKey, "phone-approval-started-tx")
         postMessageLoanTx(webClient, rqLoantx.businessKey, "phone-approval-code-tx")
+        delay(500)
+        postMessageLoanTx(webClient, rqLoantx.businessKey, "user-card-selected")
+        delay(500)
+        postMessageLoanTx(webClient, rqLoantx.businessKey, "app-assessment-done")
     }
 
     fun postMessage(webClient: WebTestClient, businessKey: String, method: String) {

@@ -3,7 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     id("org.springframework.boot") version "2.6.7"
     id("io.spring.dependency-management") version "1.0.11.RELEASE"
-    kotlin("jvm") version "1.6.21"
+    kotlin("jvm") version "1.7.10"
     kotlin("plugin.spring") version "1.6.21"
 }
 
@@ -22,9 +22,10 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
-    implementation("org.springframework.data:spring-data-r2dbc:1.4.1")
-    implementation("org.springframework.data:spring-data-relational:2.3.1")
-    implementation("io.r2dbc:r2dbc-postgresql:0.8.11.RELEASE")
+    implementation("org.springframework.data:spring-data-r2dbc:1.5.0")
+    implementation("org.springframework.data:spring-data-relational:2.4.0")
+    implementation("org.springframework.data:spring-data-commons:2.7.0")
+    implementation("io.r2dbc:r2dbc-postgresql:0.8.12.RELEASE")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("io.projectreactor:reactor-test")
