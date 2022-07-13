@@ -1,6 +1,7 @@
 package com.av.viva.avtotest.mobileCamunda.rest
 
 import com.av.viva.avtotest.mobileCamunda.rest.dto.LoanAppStartRequest
+import com.av.viva.avtotest.mobileCamunda.rest.dto.LoanPaymentStartRequest
 import com.av.viva.avtotest.mobileCamunda.rest.dto.LoanTxStartRequest
 import com.av.viva.avtotest.mobileCamunda.rest.dto.RegistrationStartRequest
 import com.fasterxml.jackson.databind.JsonNode
@@ -102,6 +103,20 @@ class MobileCamundaTest {
         postMessageLoanTx(webClient, rqLoantx.businessKey, "app-assessment-done")
     }
 
+    @Test
+    fun loanPaymentTest(@Autowired webClient: WebTestClient): Unit = runBlocking {
+        val rq = LoanPaymentStartRequest(
+            type = "loan-payment-start",
+            businessKey = "loan-AAA".replace(baseBQ, UUID.randomUUID().toString()),
+            userParams = "{\"user-id\":\"6cd933bf-70a8-4085-9db3-2da0e54eafe7\", \"loan-id\":\"3346870\", \"pay-overdue\":\"true\", \"client-platform\":\"android\", \"client-version\":\"1701\"}"
+        )
+        startProcess(webClient, rq)
+        delay(500)
+        postMessageLoan(webClient, rq.businessKey, "sum-entered")
+        postMessageLoan(webClient, rq.businessKey, "user-card-selected")
+        postMessageLoan(webClient, rq.businessKey, "card-transaction-status")
+    }
+
     fun postMessage(webClient: WebTestClient, businessKey: String, method: String) {
         var json = getJsonResource(method)
         json = json.replace("registration-AAA", businessKey, false)
@@ -122,6 +137,15 @@ class MobileCamundaTest {
         var json = getJsonResource(method)
         json = json.replace("loantx-AAA", businessKey, false)
         println("JSON loan tx $json")
+
+        postWebClient(webClient, json)
+    }
+
+    fun postMessageLoan(webClient: WebTestClient, businessKey: String, method: String) {
+        var json = getJsonResource(method)
+        json = json.replace("loan-AAA", businessKey, false)
+            .replace("loantx-AAA", businessKey, false)
+        println("JSON loan $json")
 
         postWebClient(webClient, json)
     }

@@ -1,0 +1,10 @@
+{
+  "messageName": "card-transaction-status",
+  "businessKey": "loan-AAA",
+  "processVariables": {
+    "VN_TRANSACTION_STATUS": {
+      "value":"DONE",
+      "type": "String"
+    }
+  }
+}

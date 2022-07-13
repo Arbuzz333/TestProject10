@@ -37,6 +37,7 @@ class MisController(
             "registration" -> properties.misProcessKey
             "loan-application" -> "Process_LoanApp_v1.3"
             "loan-transaction" -> "Process_LoanTx_v1.6"
+            "loan-payment" -> "Process_LoanPayment_v1.3"
             else -> "Bad request"
         }
 
@@ -223,6 +224,17 @@ class MisController(
         logger.info("add_assessment $rq")
 
         return successResponse
+    }
+
+    @PostMapping("/active_loans")
+    fun activeLoans (
+        rq: MisStartRq?
+    ): String {
+        logger.info("active_loans $rq")
+
+        return "{\"response\":{\"status\":\"SUCCESS\",\"loans\":[{\"main\":{\"loan-key\":\"3346870\"}, \"mandatory-payment\":{\"sum\":\"1212.12\"}," +
+                "\"recommend-payment\":{\"sum\":\"1200.00\"}," +
+                "\"overdue\":{\"debt-overdue\":\"111.22\", \"accrued\":\"111.33\"}}]}}"
     }
 
 }
