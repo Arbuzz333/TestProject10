@@ -3,7 +3,7 @@
   "businessKey": "loan-AAA",
   "processVariables": {
     "VN_USER_MESSAGE": {
-      "value": "{\"value\": \"7960.00\"}",
+      "value": "{\"messageName\": \"sum-entered\",\"businessKey\": \"loan-AAA\",\"value\": \"4169.00\"}",
       "type": "String"
     }
   }

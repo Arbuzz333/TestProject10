@@ -38,6 +38,7 @@ class MisController(
             "loan-application" -> "Process_LoanApp_v1.3"
             "loan-transaction" -> "Process_LoanTx_v1.6"
             "loan-payment" -> "Process_LoanPayment_v1.3"
+            "full-repayment" -> "Process_FullRepayment_v1.3"
             else -> "Bad request"
         }
 
@@ -235,6 +236,25 @@ class MisController(
         return "{\"response\":{\"status\":\"SUCCESS\",\"loans\":[{\"main\":{\"loan-key\":\"3346870\"}, \"mandatory-payment\":{\"sum\":\"1212.12\"}," +
                 "\"recommend-payment\":{\"sum\":\"1200.00\"}," +
                 "\"overdue\":{\"debt-overdue\":\"111.22\", \"accrued\":\"111.33\"}}]}}"
+    }
+
+    @PostMapping("/reg_fact_payment")
+    fun regFactPayment (
+        rq: MisStartRq?
+    ): String {
+        logger.info("reg_fact_payment $rq")
+
+        return successResponse
+    }
+
+    @PostMapping("/get_full_repayment_status")
+    fun getFullRepaymentStatus (
+        rq: MisStartRq?
+    ): String {
+        logger.info("get_full_repayment_status $rq")
+
+        return "{\"response\":{\"status\":\"SUCCESS\",\"result\":\"REQUEST_EXISTS\",\"sum\":\"555777\"," +
+                "\"fullRepaymentSum\":\"6000.45\",\"date\":\"05.12.2025\"}}"
     }
 
 }

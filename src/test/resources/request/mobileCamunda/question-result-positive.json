@@ -1,0 +1,10 @@
+{
+  "messageName":"question-result-positive",
+  "businessKey":"full-AAA",
+  "processVariables":{
+    "VN_USER_MESSAGE":{
+      "value":"{\"messageName\": \"question-result-positive\",\"businessKey\": \"full-AAA\"}",
+      "type":"String"
+    }
+  }
+}
