@@ -1,9 +1,9 @@
 {
   "messageName": "user-card-selected",
-  "businessKey": "loantx-AAA",
+  "businessKey": "loan-AAA",
   "processVariables": {
     "VN_USER_MESSAGE": {
-      "value": "{\"messageName\": \"user-card-selected\",\"businessKey\": \"loantx-AAA\",\"card-mask\": \"400000******0010\",\"card-type\": \"moneta\",\"card-token\": \"02845854\"}",
+      "value": "{\"messageName\": \"user-card-selected\",\"businessKey\": \"loan-AAA\",\"card-token\": \"02851942\",\"card-mask\": \"400000******0010\",\"card-type\": \"moneta\"}",
       "type": "String"
     }
   }
