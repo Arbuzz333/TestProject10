@@ -1,0 +1,8 @@
+{
+  "messageName":"upsale-loan-parameters",
+  "businessKey":"upsale-AAA",
+  "processVariables":{
+    "VN_USER_MESSAGE":{
+      "value":"{\"messageName\": \"upsale-loan-parameters\",\"businessKey\": \"upsale-AAA\",\"loan-parameters\": {\"sum\": \"65800\",\"period\": \"12M\",\"insurance\": true,\"insurance_sum\": \"5800\"}}",
+      "type":"String"}}
+}

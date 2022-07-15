@@ -1,0 +1,10 @@
+{
+  "messageName": "upsale-employment-info",
+  "businessKey": "upsale-AAA",
+  "processVariables": {
+    "VN_USER_MESSAGE": {
+      "value": "{\"messageName\": \"upsale-employment-info\",\"businessKey\": \"upsale-AAA\",\"employment-info\": {\"income-type\": \"EMPLOYED\",\"organization-type\": \"COMMERCIAL_ORGANIZATION\",\"company-occupations\": \"IT_AND_TELECOM\",\"last-work-term\": \"LESS_THAN_3M\",\"position\": \"OWNER\",\"salary\": 50000}}",
+      "type": "String"
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "messageName": "upsale-family",
+  "businessKey": "upsale-AAA",
+  "processVariables": {
+    "VN_USER_MESSAGE": {
+      "value": "{\"family-status\": \"MARRIED\",\"family-status-text\": \"Женат/замужем\"}",
+      "type": "String"
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "messageName":"upsale-continue",
+  "businessKey":"upsale-AAA",
+  "processVariables":{
+    "VN_USER_MESSAGE":{
+      "value":"{\"messageName\": \"upsale-continue\",\"businessKey\": \"upsale-AAA\"}",
+      "type":"String"}}
+}

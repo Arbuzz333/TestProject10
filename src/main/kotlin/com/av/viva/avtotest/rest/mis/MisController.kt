@@ -10,6 +10,7 @@ import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
+import java.time.LocalDate
 
 
 @RestController
@@ -39,6 +40,7 @@ class MisController(
             "loan-transaction" -> "Process_LoanTx_v1.6"
             "loan-payment" -> "Process_LoanPayment_v1.3"
             "full-repayment" -> "Process_FullRepayment_v1.3"
+            "upsale" -> "Process_Upsale_v1.4"
             else -> "Bad request"
         }
 
@@ -255,6 +257,37 @@ class MisController(
 
         return "{\"response\":{\"status\":\"SUCCESS\",\"result\":\"REQUEST_EXISTS\",\"sum\":\"555777\"," +
                 "\"fullRepaymentSum\":\"6000.45\",\"date\":\"05.12.2025\"}}"
+    }
+
+    @PostMapping("/loanapp_review_upsale")
+    fun loanAppReviewUpSale (
+        rq: MisStartRq?
+    ): String {
+        logger.info("loanapp_review_upsale $rq")
+
+        return successResponse
+    }
+
+    @PostMapping("/get_offer_upsale")
+    fun getOfferUpsale (
+        rq: MisStartRq?
+    ): String {
+        logger.info("get_offer_upsale $rq")
+        val dateNow = LocalDate.now().toString()
+
+        return "{\"response\":{\"status\":\"SUCCESS\",\"offer\":[{\"offer-id\":\"1110555\", \"date\":\"$dateNow\"," +
+                "\"sum\":\"120077.00\"," +
+                "\"period\":\"11M\",\"rate\":\"75\",\"text\":\"GET offer up sale\"}]}}"
+    }
+
+    @PostMapping("/upsale_docs")
+    fun upSaleDocs (
+        rq: MisStartRq?
+    ): String {
+        logger.info("upsale_docs $rq")
+
+        return "{\"response\":{\"status\":\"SUCCESS\",\"individual-conditions\":\"individual conditions\"," +
+                "\"payment-schedule\":\"week\",\"agreement-to-hold\":\"HOLD\",\"insurance-terms\":\"TERMS\"}}"
     }
 
 }

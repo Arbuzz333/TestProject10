@@ -1,0 +1,10 @@
+{
+  "messageName": "phone-approval-started",
+  "businessKey": "upsale-AAA",
+  "processVariables": {
+    "VN_USER_MESSAGE": {
+      "value": "{\"messageName\": \"phone-approval-started\",\"businessKey\": \"upsale-AAA\"}",
+      "type": "String"
+    }
+  }
+}

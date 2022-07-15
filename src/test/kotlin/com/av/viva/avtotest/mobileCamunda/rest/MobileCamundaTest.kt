@@ -138,6 +138,41 @@ class MobileCamundaTest {
         postMessage(webClient, rq.businessKey, "card-transaction-status")
     }
 
+    @Test
+    fun upsaleTest(@Autowired webClient: WebTestClient): Unit = runBlocking {
+        val rq = UpsaleStartRequest(
+            type = "upsale-start",
+            businessKey = "upsale-AAA".replace(baseBQ, UUID.randomUUID().toString()),
+            userParams = "{\"messageName\": \"upsale-start\"," +
+                    "\"user-id\": \"e87667c5-79a4-472f-a9e7-031b144e6f41\"," +
+                    "\"offer-id\": \"9915530\"," +
+                    "\"sum\": \"60000\"," +
+                    "\"period\": \"12 месяцев\"," +
+                    "\"client-platform\":\"android\"," +
+                    "\"client-version\": \"1701\"}"
+        )
+        startProcess(webClient, rq)
+        delay(500)
+        postMessage(webClient, rq.businessKey, "upsale-continue")
+        postMessage(webClient, rq.businessKey, "upsale-family")
+        postMessage(webClient, rq.businessKey, "upsale-employment-info")
+        postMessage(webClient, rq.businessKey, "upsale-terms-agree")
+        delay(500)
+        postMessage(webClient, rq.businessKey, "phone-approval-started-upsale")
+        postMessage(webClient, rq.businessKey, "phone-approval-code-tx")
+        delay(500)
+        postMessage(webClient, rq.businessKey, "upsale-accepted")
+        delay(500)
+        postMessage(webClient, rq.businessKey, "upsale-loan-parameters")
+        delay(500)
+        postMessage(webClient, rq.businessKey, "upsale-terms-agree")
+        delay(500)
+        postMessage(webClient, rq.businessKey, "phone-approval-started-upsale")
+        postMessage(webClient, rq.businessKey, "phone-approval-code-tx")
+        delay(500)
+        postMessage(webClient, rq.businessKey, "user-card-selected")
+    }
+
     fun postMessage(webClient: WebTestClient, businessKey: String, method: String) {
         var json = getJsonResource(method)
         json = json
@@ -146,6 +181,7 @@ class MobileCamundaTest {
             .replace("loantx-AAA", businessKey, false)
             .replace("loanapp-AAA", businessKey, false)
             .replace("full-AAA", businessKey, false)
+            .replace("upsale-AAA", businessKey, false)
         println("JSON $method $json")
 
         postWebClient(webClient, json)
