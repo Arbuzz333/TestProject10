@@ -1,0 +1,10 @@
+{
+  "messageName": "restruct-params-continue",
+  "businessKey": "restruct-AAA",
+  "processVariables": {
+    "VN_USER_MESSAGE": {
+      "value": "{\"messageName\": \"restruct-params-continue\",\"businessKey\": \"restruct-AAA\"}",
+      "type": "String"
+    }
+  }
+}

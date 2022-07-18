@@ -3,6 +3,10 @@ package com.av.viva.avtotest.rest.mis
 import com.av.viva.avtotest.config.AppTestProperties
 import com.av.viva.avtotest.rest.dto.MisStartRq
 import com.av.viva.avtotest.rest.dto.RequestData
+import com.av.viva.avtotest.rest.mis.dto.BaseResponseDocs
+import com.av.viva.avtotest.rest.mis.dto.BaseResponseRefin
+import com.av.viva.avtotest.rest.mis.dto.BaseResponseRefinConfirm
+import com.av.viva.avtotest.rest.mis.dto.GetRefinParamsResult
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -41,6 +45,7 @@ class MisController(
             "loan-payment" -> "Process_LoanPayment_v1.3"
             "full-repayment" -> "Process_FullRepayment_v1.3"
             "upsale" -> "Process_Upsale_v1.4"
+            "restructure" -> "Process_Restructure_v1.3"
             else -> "Bad request"
         }
 
@@ -288,6 +293,64 @@ class MisController(
 
         return "{\"response\":{\"status\":\"SUCCESS\",\"individual-conditions\":\"individual conditions\"," +
                 "\"payment-schedule\":\"week\",\"agreement-to-hold\":\"HOLD\",\"insurance-terms\":\"TERMS\"}}"
+    }
+
+    @PostMapping("/create_refin")
+    fun createRefin (
+        rq: MisStartRq?
+    ): String {
+        logger.info("create_refin $rq")
+        val mapper = ObjectMapper()
+        val loanRq = mapper.readValue(rq?.request?.process, MisStartRq.LoanRq::class.java)
+
+        return "{\"response\":{\"status\":\"SUCCESS\",\"result\":\"CREATED\"," +
+                "\"refin-id\":\"555333888\",\"business-key\":\"${loanRq.businessKey}\"}}"
+    }
+
+    @PostMapping("/get_refin_params")
+    fun getRefinParams (
+        rq: MisStartRq?
+    ): BaseResponseRefin {
+        logger.info("get_refin_params $rq")
+        val result = GetRefinParamsResult(
+            guaranteeSum = 957.08,
+            validUntilDate = LocalDate.now(),
+            loanAmount = 155.35,
+            payment = 37.01,
+            period = "1M",
+            rate = 25.07,
+            numberPayments = 12
+        )
+        val rs = BaseResponseRefin(response = result)
+
+        return rs
+    }
+
+    @PostMapping("/refin_docs")
+    fun refinDocs (
+        rq: MisStartRq?
+    ): BaseResponseDocs {
+        logger.info("refin_docs $rq")
+        val result = BaseResponseDocs.RefinDocsResult(
+            individualConditions = "no longer",
+            paymentSchedule = "1 M",
+            statementNovation = "statement was closed"
+        )
+        val rs = BaseResponseDocs(response = result)
+
+        return rs
+    }
+
+    @PostMapping("/refin_confirm")
+    fun refinConfirm (
+        rq: MisStartRq?
+    ): BaseResponseRefinConfirm {
+        logger.info("refin_confirm $rq")
+        val rs = BaseResponseRefinConfirm(
+            response = BaseResponseRefinConfirm.RefinConfirmResult()
+        )
+
+        return rs
     }
 
 }

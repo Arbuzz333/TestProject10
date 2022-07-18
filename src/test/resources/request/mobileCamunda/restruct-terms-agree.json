@@ -1,0 +1,10 @@
+{
+  "messageName": "restruct-terms-agree",
+  "businessKey": "restruct-AAA",
+  "processVariables": {
+    "VN_USER_MESSAGE": {
+      "value": "{\"messageName\": \"restruct-terms-agree\",\"businessKey\": \"restruct-AAA\"}",
+      "type": "String"
+    }
+  }
+}

@@ -173,6 +173,31 @@ class MobileCamundaTest {
         postMessage(webClient, rq.businessKey, "user-card-selected")
     }
 
+    @Test
+    fun restructTest(@Autowired webClient: WebTestClient): Unit = runBlocking {
+        val rq = RestructureStartRequest(
+            type = "restruct-start",
+            businessKey = "restruct-AAA".replace(baseBQ, UUID.randomUUID().toString()),
+            userParams = "{\"messageName\": \"restruct-start\"," +
+                    "\"user-id\": \"e87667c5-79a4-472f-a9e7-031b144e6f41\"," +
+                    "\"loan-id\": \"3346912\"," +
+                    "\"client-platform\": \"android\"," +
+                    "\"client-version\": \"1701\"}"
+        )
+        startProcess(webClient, rq)
+        delay(500)
+        postMessage(webClient, rq.businessKey, "refin-accepted")
+        delay(5500)
+        postMessage(webClient, rq.businessKey, "restruct-params-continue")
+        delay(500)
+        postMessage(webClient, rq.businessKey, "user-card-selected")
+        postMessage(webClient, rq.businessKey, "card-transaction-status")
+        delay(500)
+        postMessage(webClient, rq.businessKey, "restruct-terms-agree")
+        postMessage(webClient, rq.businessKey, "phone-approval-started-upsale")
+        postMessage(webClient, rq.businessKey, "phone-approval-code-tx")
+    }
+
     fun postMessage(webClient: WebTestClient, businessKey: String, method: String) {
         var json = getJsonResource(method)
         json = json
@@ -182,6 +207,7 @@ class MobileCamundaTest {
             .replace("loanapp-AAA", businessKey, false)
             .replace("full-AAA", businessKey, false)
             .replace("upsale-AAA", businessKey, false)
+            .replace("restruct-AAA", businessKey, false)
         println("JSON $method $json")
 
         postWebClient(webClient, json)
