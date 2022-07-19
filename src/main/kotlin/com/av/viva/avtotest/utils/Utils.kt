@@ -22,6 +22,10 @@ fun randomDigits(length: Int): Long {
     return randomString
 }
 
+fun randomDouble(length: Int): Double {
+    return randomDigits(length).toDouble().div(100)
+}
+
 fun randomDigitsStr(length: Int): String {
     return randomDigits(length).toString()
 }
