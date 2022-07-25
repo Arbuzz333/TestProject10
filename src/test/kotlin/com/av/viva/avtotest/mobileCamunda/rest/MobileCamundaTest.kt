@@ -174,6 +174,33 @@ class MobileCamundaTest {
     }
 
     @Test
+    fun upsaleTryLaterTest(@Autowired webClient: WebTestClient): Unit = runBlocking {
+        val rq = UpsaleStartRequest(
+            type = "upsale-start",
+            businessKey = "upsale-AAA".replace(baseBQ, UUID.randomUUID().toString()),
+            userParams = "{\"messageName\": \"upsale-start\"," +
+                    "\"user-id\": \"e87667c5-79a4-472f-a9e7-031b144e6f41\"," +
+                    "\"offer-id\": \"9915530\"," +
+                    "\"sum\": \"60000\"," +
+                    "\"period\": \"12 месяцев\"," +
+                    "\"client-platform\":\"android\"," +
+                    "\"client-version\": \"1701\"}"
+        )
+        startProcess(webClient, rq)
+        delay(500)
+        postMessage(webClient, rq.businessKey, "upsale-continue")
+        postMessage(webClient, rq.businessKey, "upsale-family")
+        postMessage(webClient, rq.businessKey, "upsale-employment-info")
+        postMessage(webClient, rq.businessKey, "upsale-terms-agree")
+        delay(500)
+        postMessage(webClient, rq.businessKey, "phone-approval-started-upsale")
+        postMessage(webClient, rq.businessKey, "phone-approval-code-tx")
+        delay(500)
+
+        postMessage(webClient, rq.businessKey, "upsale-try-later")
+    }
+
+    @Test
     fun restructTest(@Autowired webClient: WebTestClient): Unit = runBlocking {
         val rq = RestructureStartRequest(
             type = "restruct-start",
